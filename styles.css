@@ -1,0 +1,332 @@
+/* Общие стили */
+:root {
+    --max-width: 980px;
+    --gap: 18px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color-scheme: light;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    margin: 0;
+    background: #fff;
+    color: #111;
+    line-height: 1.5
+}
+
+.site-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    border-bottom: 1px solid #eee;
+    z-index: 10
+}
+
+.nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    gap: var(--gap)
+}
+
+.nav-logo {
+    font-weight: 700;
+    text-decoration: none;
+    color: inherit
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 12px
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 10px;
+    border-radius: 8px
+}
+
+.nav-list a:hover {
+    background: rgba(0, 0, 0, 0.04)
+}
+
+/* layout */
+.container {
+    max-width: var(--max-width);
+    margin: 28px auto;
+    padding: 0 16px
+}
+
+.hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 18px
+}
+
+.hero-image {
+    width: 320px;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12)
+}
+
+.hero-text {
+    flex: 1;
+    min-width: 220px
+}
+
+.lead {
+    color: #555;
+    margin-top: 8px
+}
+
+.content h2 {
+    margin-top: 16px
+}
+
+/* footer */
+.site-footer {
+    border-top: 1px solid #eee;
+    padding: 18px;
+    text-align: center;
+    color: #666;
+    margin-top: 30px;
+    font-size: 14px
+}
+
+body.page-vision .site-footer {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* --- Vision page (purple Metatron cube) --- */
+body.page-vision {
+    /* background: linear-gradient(180deg, #0b0015 0%, #150925 60%, #fff 100%);
+    color: #f3f3f7; */
+    background-color: #1b0938;
+    /* глубокий фиалковый оттенок */
+    color: #f3f3f7;
+}
+
+body.page-vision .site-header {
+    /* тёмный полупрозрачный фон, чтобы читабельно на тёмном фоне */
+    background: rgba(0, 0, 0, 0.45);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+body.page-vision .nav-logo {
+    color: #f6f0ff
+}
+
+body.page-vision .nav-list a {
+    color: rgba(255, 255, 255, 0.9)
+}
+
+body.page-vision .hero-image {
+    width: 360px;
+    height: 260px;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(88, 0, 120, 0.45);
+    filter: contrast(1.05) saturate(1.1)
+}
+
+body.page-vision .content {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    padding: 18px;
+    border-radius: 12px
+}
+
+body.page-vision h1,
+body.page-vision h2,
+body.page-vision h3 {
+    color: #f9f6ff
+}
+
+body.page-vision p {
+    color: rgba(255, 255, 255, 0.85)
+}
+
+body.page-vision .lead {
+    color: rgba(255, 255, 255, 0.9)
+}
+
+/* --- Holistic page (soft spa tone) --- */
+body.page-holistic {
+    /* Палитра для холистической страницы */
+    --hol-bg: #F0FFF0;
+    /* основной фон (бледный мятно-зелёный) */
+    --hol-text: #444444;
+    /* основной текст (тёмно-серый) */
+    --hol-accent: #6B8E23;
+    /* акцент для заголовков (оливково-зелёный) */
+    --hol-cta: #D2B48C;
+    /* кнопки / CTA (песочный) */
+    --hol-muted: #DCDCDC;
+    /* разделители, рамки */
+    background-color: var(--hol-bg);
+    color: var(--hol-text);
+}
+
+/* Навигация */
+body.page-holistic .nav-logo {
+    color: var(--hol-accent);
+    font-weight: 700;
+}
+
+body.page-holistic .nav-list a {
+    color: var(--hol-text);
+    transition: background .15s, color .15s;
+}
+
+body.page-holistic .nav-list a:hover {
+    background: rgba(107, 142, 35, 0.08);
+    color: var(--hol-accent);
+}
+
+/* Герой */
+body.page-holistic .hero-image {
+    width: 320px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(27, 40, 22, 0.08);
+    border: 1px solid rgba(107, 142, 35, 0.06);
+}
+
+/* Текст в герое */
+body.page-holistic .lead {
+    color: #566a5a;
+    margin-top: 8px;
+}
+
+/* Контентный блок */
+body.page-holistic .content {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--hol-text);
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(30, 40, 30, 0.04);
+}
+
+/* Заголовки */
+body.page-holistic h1 {
+    color: #173922;
+}
+
+body.page-holistic h2,
+body.page-holistic h3 {
+    color: var(--hol-accent);
+    margin-top: 18px;
+}
+
+/* Списки и тексты */
+body.page-holistic p,
+body.page-holistic li {
+    color: var(--hol-text);
+    line-height: 1.65;
+}
+
+/* Карточки/разделители (если понадобятся) */
+body.page-holistic .card {
+    background: #fff;
+    border: 1px solid var(--hol-muted);
+    border-radius: 10px;
+    padding: 16px;
+}
+
+/* Кнопка призыва (если добавите) */
+.btn {
+    display: inline-block;
+    background: var(--hol-cta);
+    color: #2b2b20;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(210, 180, 140, 0.14);
+    transition: transform .12s, box-shadow .12s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(210, 180, 140, 0.18);
+}
+
+/* Футер (мягкий, но читаемый) */
+body.page-holistic .site-footer {
+    background: transparent;
+    color: #6b6b62;
+    border-top-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Раздел "Регуляция" */
+.regulation {
+    /* background-color: #bfa3e5; приятный фиалковый тон */
+    background-color: #1b0938;
+    /* background-color: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)); */
+    color: #fff;
+    padding: 60px 20px;
+    border-radius: 24px;
+    margin-top: 60px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.regulation h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.reg-block {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px 30px;
+    border-radius: 16px;
+    margin-top: 25px;
+}
+
+.reg-block h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.reg-block ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.reg-block li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+@media (max-width:720px) {
+    body.page-holistic .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    body.page-holistic .hero-image {
+        width: 100%;
+        height: 220px;
+    }
+
+    body.page-holistic .content {
+        padding: 16px;
+    }
+}
