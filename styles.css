@@ -191,6 +191,16 @@ body.page-holistic .nav-logo {
 body.page-holistic .nav-list a {
     color: var(--hol-text);
     transition: background .15s, color .15s;
+
+    display: inline-flex;         /* делает ссылку флекс-контейнером */
+    align-items: center;          /* вертикальное центрирование содержания */
+    justify-content: center;      /* горизонтальное центрирование */
+    text-align: center;           /* центрирование текста внутри */
+    white-space: normal;          /* разрешаем перенос строк */
+    line-height: 1.15;            /* аккуратный межстрочный интервал */
+    padding: 8px 10px;            /* существующая внутрянка — можно подправить */
+    min-width: 56px;              /* необязательно: предотвращает слишком узкие ячейки */
+    box-sizing: border-box;
 }
 
 body.page-holistic .nav-list a:hover {
@@ -329,4 +339,10 @@ body.page-holistic .site-footer {
     body.page-holistic .content {
         padding: 16px;
     }
+}
+
+/* Немного уточнить при очень узких экранах (опционально) */
+@media (max-width:420px) {
+  .nav-list { gap: 8px; }           /* поменьше отступы между кнопками */
+  .nav-list a { padding: 6px 8px; } /* меньше паддинга, чтобы не ломать перенос */
 }
