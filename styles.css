@@ -411,7 +411,7 @@ body.page-holistic .site-footer {
 }
 
 /* адаптация под мобильные: блоки стекутся, фото и текст читаемы */
-@media (max-width:720px) {
+/* @media (max-width:720px) {
   .content-row {
     flex-direction: column;
   }
@@ -430,6 +430,38 @@ body.page-holistic .site-footer {
     border-radius: 8px;
   }
   .author-info { margin-top: 0; }
+} */
+
+@media (max-width: 720px) {
+  .content-row {
+    flex-direction: column-reverse; /* меняем порядок: фото теперь будет выше */
+  }
+
+  .content-author {
+    order: -1; /* гарантированно поднимаем наверх */
+    width: 100%;
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .author-photo {
+    width: 80%;          /* увеличиваем фото по ширине экрана */
+    max-width: 320px;    /* но не делаем чрезмерно большим */
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .author-info {
+    margin-top: 10px;
+  }
+
+  .content-left {
+    text-align: justify;
+  }
 }
 
 
