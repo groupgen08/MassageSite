@@ -77,11 +77,19 @@ body {
 }
 
 .hero-image {
-    width: 320px;
+    width: 100%;
+    /* width: 320px; */
     height: 220px;
     object-fit: contain;
     border-radius: 12px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.12)
+}
+.massage-image-block {
+  display: flex;
+  justify-content: center; /* центрирует по горизонтали */
+  align-items: center;     /* центрирует по вертикали, если есть высота */
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .hero-text {
@@ -235,7 +243,8 @@ body.page-holistic .content {
 
 /* Заголовки */
 body.page-holistic h1 {
-    color: #173922;
+    /* color: #173922; */
+    color: var(--hol-accent);
 }
 
 body.page-holistic h2,
@@ -386,7 +395,7 @@ body.page-holistic .site-footer {
 /* фото автора */
 .author-photo {
   width: 180px;
-  height: 316px;
+  /* height: 316px; */
   object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.06);
