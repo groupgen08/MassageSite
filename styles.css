@@ -293,77 +293,6 @@ body.page-holistic .site-footer {
     border-top-color: rgba(0, 0, 0, 0.04);
 }
 
-/* ____________________________________________________________________________________________________________ */
-
-/* Author hero — верхний блок с фото автора + спа-картинкой */
-/* .author-hero {
-  display: flex;
-  gap: 22px;
-  align-items: flex-start;
-  margin-bottom: 18px;
-} */
-
-/* карточка автора */
-/* .author-card { */
-/* фиксированная колонка для фото/меты */
-  /* flex: 0 0 200px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 14px;
-  box-shadow: 0 8px 28px rgba(20,30,20,0.06);
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  border: 1px solid rgba(107,142,35,0.05);
-} */
-
-/* .author-photo {
-  width: 88px;
-  height: 88px;
-  object-fit: contain;
-  border-radius: 12px;
-  flex: 0 0 88px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  border: 2px solid rgba(255,255,255,0.6);
-} */
-
-/* .author-meta h3 {
-  margin: 0 0 6px 0;
-  font-size: 1rem; */
-  /* близко к акцентному цвету */
-  /* color: #193922;
-  line-height: 1.1;
-} */
-
-/* .author-meta .author-role {
-  margin: 0;
-  font-size: 13px;
-  color: #55685a;
-} */
-
-/* правая часть — спа-изображение + текст (как раньше) */
-/* .spa-card {
-  flex: 1 1 auto;
-  display: flex;
-  gap: 18px;
-  align-items: center;
-}
-
-.spa-card .hero-image {
-  width: 320px;
-  height: 220px;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 8px 30px rgba(20,30,20,0.06);
-  border: 1px solid rgba(107,142,35,0.06);
-}
-
-.spa-card .hero-text {
-  flex: 1;
-  min-width: 220px;
-} */
-
-
 
 /* content: двухколоночная строка — текст слева, автор справа */
 .content-row {
@@ -403,7 +332,9 @@ body.page-holistic .site-footer {
 }
 
 /* метаданные автора под фото */
-.author-info { margin-top: 12px; }
+.author-info {
+    margin-bottom: 12px;
+}
 
 .author-name {
   color: var(--hol-accent);
@@ -418,28 +349,6 @@ body.page-holistic .site-footer {
   margin-top: 6px;
   line-height: 1.2;
 }
-
-/* адаптация под мобильные: блоки стекутся, фото и текст читаемы */
-/* @media (max-width:720px) {
-  .content-row {
-    flex-direction: column;
-  }
-  .content-author {
-    width: 100%;
-    flex: none;
-    flex-direction: row;
-    align-items: center;
-    text-align: left;
-    gap: 12px;
-    padding: 12px;
-  }
-  .author-photo {
-    width: 88px;
-    height: 88px;
-    border-radius: 8px;
-  }
-  .author-info { margin-top: 0; }
-} */
 
 @media (max-width: 720px) {
   .content-row {
@@ -472,10 +381,6 @@ body.page-holistic .site-footer {
     text-align: justify;
   }
 }
-
-
-/* ____________________________________________________________________________________________________________ */
-
 
 /* Раздел "Регуляция" */
 .regulation {
