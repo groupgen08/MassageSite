@@ -434,7 +434,7 @@ body.page-holistic .site-footer {
 
 @media (max-width: 720px) {
   .content-row {
-    flex-direction: column-reverse; /* меняем порядок: фото теперь будет выше */
+    flex-direction: column; /* меняем порядок: фото теперь будет выше */
   }
 
   .content-author {
