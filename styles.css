@@ -367,9 +367,10 @@ body.page-holistic .site-footer {
   }
 
   .author-photo {
-    width: 80%;          /* увеличиваем фото по ширине экрана */
-    max-width: 320px;    /* но не делаем чрезмерно большим */
-    height: auto;
+    /* width: 80%; */
+    max-width: 320px;
+    width: auto;
+    max-height: 250px;
     border-radius: 12px;
   }
 
