@@ -299,9 +299,10 @@ body.page-holistic .card {
 
 /* Футер (мягкий, но читаемый) */
 body.page-holistic .site-footer {
-    background: transparent;
+    background-color: #F0FFF0;
     color: #6b6b62;
     border-top-color: rgba(0, 0, 0, 0.04);
+    border-top-width: 2px;
 }
 
 
@@ -708,10 +709,10 @@ body.page-apitherapy {
 }
 
 /* footer */
-.page-apitherapy .site-footer {
+/* .page-apitherapy .site-footer {
     background: transparent;
     color: #6b6b62;
-}
+} */
 
 /* адаптив */
 @media (max-width: 900px) {
@@ -841,10 +842,10 @@ body.page-apitherapy {
 }
 
 /* На случай, если ::before всё ещё перекрывает (удаляем его влияние в зоне футера) */
-.page-apitherapy::before {
+/* .page-apitherapy::before { */
   /* если ты хочешь полностью убрать оверлей — раскомментируй следующую строку */
   /* display: none; */
-}
+/* } */
 
 /* Если футер всё ещё частично прозрачен из-за родительских RGBA,
    можно сделать дополнительный «щит» внутри футера: */
