@@ -9,13 +9,29 @@
 <body class="page-holistic">
   <header class="site-header">
     <div class="nav">
-      <a class="nav-logo" href="index.html">The Fulcrum</a>
-      <ul class="nav-list">
+        <a class="nav-logo" href="index.html">The Fulcrum</a>
+        <ul class="nav-list">
+        <li><a href="index.html">Видение лидера</a></li>
+        <li><a href="holistic.html" class="active">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+        </ul>
+
+        <!-- кнопка-гамбургер для мобильных -->
+        <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
+        ☰
+        </button>
+    </div>
+
+    <!-- боковое мобильное меню -->
+    <nav class="side-nav" aria-hidden="true">
+        <button class="side-close" aria-label="Закрыть меню">✕</button>
+        <ul>
         <li><a href="index.html">Видение лидера</a></li>
         <li><a href="holistic.html">Холистический подход</a></li>
-      </ul>
-    </div>
-  </header>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+        </ul>
+    </nav>
+    </header>
 
   <main class="container">
     <div class="massage-image-block">
@@ -105,5 +121,38 @@
   <footer class="site-footer">
     <p>© The Fulcrum — Портал здоровья</p>
   </footer>
+
+  <!-- небольшой inline-скрипт для мобильного меню -->
+  <script>
+    (function(){
+      const toggle = document.querySelector('.nav-toggle');
+      const side = document.querySelector('.side-nav');
+      const closeBtn = document.querySelector('.side-close');
+      function openSide() {
+        side.classList.add('open');
+        document.body.classList.add('no-scroll');
+        toggle.setAttribute('aria-expanded','true');
+        side.setAttribute('aria-hidden','false');
+      }
+      function closeSide() {
+        side.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+        toggle.setAttribute('aria-expanded','false');
+        side.setAttribute('aria-hidden','true');
+      }
+      if(toggle && side){
+        toggle.addEventListener('click', ()=> {
+          side.classList.contains('open') ? closeSide() : openSide();
+        });
+      }
+      if(closeBtn) closeBtn.addEventListener('click', closeSide);
+      // закрыть при клике вне меню
+      document.addEventListener('click', (e)=> {
+        if(side.classList.contains('open') && !side.contains(e.target) && !toggle.contains(e.target)){
+          closeSide();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
