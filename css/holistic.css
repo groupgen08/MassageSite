@@ -1,0 +1,217 @@
+/* --- Holistic page (soft spa tone) --- */
+body.page-holistic {
+    /* Палитра для холистической страницы */
+    --hol-bg: #F0FFF0;
+    /* основной фон (бледный мятно-зелёный) */
+    --hol-text: #444444;
+    /* основной текст (тёмно-серый) */
+    --hol-accent: #6B8E23;
+    /* акцент для заголовков (оливково-зелёный) */
+    --hol-cta: #D2B48C;
+    /* кнопки / CTA (песочный) */
+    --hol-muted: #DCDCDC;
+
+    --hol-hover: rgba(107, 142, 35, 0.08);
+    /* разделители, рамки */
+    background-color: var(--hol-bg);
+    color: var(--hol-text);
+}
+
+/* Навигация */
+body.page-holistic .nav-logo {
+    color: var(--hol-accent);
+    font-weight: 700;
+}
+
+body.page-holistic .nav-list a {
+    color: var(--hol-text);
+}
+
+body.page-holistic .nav-list a:hover {
+    background: var(--hol-hover);
+    color: var(--hol-accent);
+}
+
+.massage-image-block {
+    display: flex;
+    justify-content: center;
+    /* центрирует по горизонтали */
+    align-items: center;
+    /* центрирует по вертикали, если есть высота */
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Герой */
+body.page-holistic .hero-image {
+    width: 320px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 10px 30px rgba(27, 40, 22, 0.08);
+    border: 1px solid rgba(107, 142, 35, 0.06);
+}
+
+/* Текст в герое */
+body.page-holistic .lead {
+    color: #566a5a;
+    margin-top: 8px;
+}
+
+/* Контентный блок */
+body.page-holistic .content {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--hol-text);
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(30, 40, 30, 0.04);
+}
+
+/* Заголовки */
+body.page-holistic h1 {
+    /* color: #173922; */
+    color: var(--hol-accent);
+}
+
+body.page-holistic h2,
+body.page-holistic h3 {
+    color: var(--hol-accent);
+    margin-top: 18px;
+}
+
+/* Списки и тексты */
+body.page-holistic p,
+body.page-holistic li {
+    color: var(--hol-text);
+    line-height: 1.65;
+}
+
+/* Карточки/разделители (если понадобятся) */
+body.page-holistic .card {
+    background: #fff;
+    border: 1px solid var(--hol-muted);
+    border-radius: 10px;
+    padding: 16px;
+}
+
+/* Футер (мягкий, но читаемый) */
+body.page-holistic .site-footer {
+    background-color: #F0FFF0;
+    color: #6b6b62;
+    border-top-color: rgba(0, 0, 0, 0.04);
+    border-top-width: 2px;
+}
+
+/* content: двухколоночная строка — текст слева, автор справа */
+.content-row {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+/* левая колонка — занимает всё доступное место */
+.content-left {
+    flex: 1 1 auto;
+}
+
+/* правая колонка — карточка автора (вертикальная) */
+.content-author {
+    flex: 0 0 300px;
+    /* фиксированная, но не жёсткая ширина */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(20, 30, 20, 0.05);
+    border: 1px solid rgba(107, 142, 35, 0.06);
+}
+
+/* фото автора */
+.author-photo {
+    width: 180px;
+    /* height: 316px; */
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    flex: 0 0 auto;
+}
+
+/* метаданные автора под фото */
+.author-info {
+    margin-bottom: 12px;
+}
+
+.author-name {
+    color: var(--hol-accent);
+    font-weight: 700;
+    font-size: 0.98rem;
+    line-height: 1.1;
+}
+
+.author-role {
+    color: var(--hol-text);
+    font-size: 0.92rem;
+    margin-top: 6px;
+    line-height: 1.2;
+}
+
+@media (max-width: 720px) {
+    .content-row {
+        flex-direction: column;
+        /* меняем порядок: фото теперь будет выше */
+    }
+
+    .content-author {
+        order: -1;
+        /* гарантированно поднимаем наверх */
+        width: 100%;
+        flex: none;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        padding: 14px;
+    }
+
+    .author-photo {
+        /* width: 80%; */
+        max-width: 320px;
+        width: auto;
+        max-height: 250px;
+        border-radius: 12px;
+    }
+
+    .author-info {
+        margin-top: 10px;
+    }
+
+    .content-left {
+        text-align: justify;
+    }
+}
+
+@media (max-width:720px) {
+    body.page-holistic .hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    body.page-holistic .hero-image {
+        /* width: 100%;
+        height: 220px; */
+        max-width: 320px;
+        max-height: 220px;
+        object-fit: cover;
+        border-radius: 5px;
+        box-shadow: 0 10px 30px rgba(27, 40, 22, 0.08);
+        border: 1px solid rgba(107, 142, 35, 0.06);
+    }
+
+    body.page-holistic .content {
+        padding: 16px;
+    }
+}

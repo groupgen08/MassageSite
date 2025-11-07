@@ -1,0 +1,135 @@
+/* --- Vision page (purple Metatron cube) --- */
+body.page-vision .site-footer {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+body.page-vision {
+    --vision-accent: #fff;
+    --vision-text: #fff;
+    --vision-hover: rgba(32, 32, 32, 0.45);
+    background-color: #1b0938;
+    /* глубокий фиалковый оттенок */
+    color: #f3f3f7;
+}
+
+body.page-vision .site-header {
+    /* тёмный полупрозрачный фон, чтобы читабельно на тёмном фоне */
+    background: rgba(0, 0, 0, 0.45);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+body.page-vision .nav-logo {
+    color: #f6f0ff
+}
+
+body.page-vision .nav-list a {
+    color: var(--vision-text);
+}
+
+body.page-vision .nav-list a:hover {
+    background: var(--vision-hover);
+    color: var(--vision-accent);
+}
+
+body.page-vision .hero-image {
+    width: 360px;
+    height: 260px;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(88, 0, 120, 0.45);
+    filter: contrast(1.05) saturate(1.1)
+}
+
+body.page-vision .content {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    padding: 18px;
+    border-radius: 12px
+}
+
+body.page-vision h1,
+body.page-vision h2,
+body.page-vision h3 {
+    color: #f9f6ff
+}
+
+body.page-vision p {
+    color: rgba(255, 255, 255, 0.85)
+}
+
+body.page-vision .lead {
+    color: rgba(255, 255, 255, 0.9)
+}
+
+/* Раздел "Регуляция" */
+.regulation {
+    background-color: #1b0938;
+    color: #fff;
+    padding: 20px 20px;
+    border-radius: 24px;
+    margin-top: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.regulation h2 {
+    margin-top: 0px;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.reg-block {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px 30px;
+    border-radius: 16px;
+    margin-top: 25px;
+}
+
+.reg-block h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.reg-block ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.reg-block li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* ГАМБУРГЕР ДЛЯ СТРАНИЦЫ "ВИДЕНИЕ ЛИДЕРА" */
+/* Сделать гамбургер видимым и контрастным на тёмной странице Vision */
+body.page-vision .nav-toggle {
+  display: none;               /* базово скрыт (будет показан в медиазапросе ниже) */
+  color: #fff;                 /* белый символ */
+  background: rgba(255,255,255,0.06); /* лёгкий полупрозрачный фон для контраста */
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 20px;
+  line-height: 1;
+  min-width: 44px;
+  z-index: 3000;               /* чтобы быть выше прочих элементов */
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+
+/* Показать гамбургер в мобильных */
+@media (max-width:720px) {
+  /* скрыть обычное меню */
+  body.page-vision .nav-list { display: none; }
+  body.page-vision .nav-toggle { display: inline-block; }
+}
+
+/* Если хочешь тёмную панель вместо светлой (опция) */
+body.page-vision .side-nav {
+  background: rgba(12,8,20,0.95);
+  color: #fff;
+}
+body.page-vision .side-nav .side-close {
+    color: white;
+}
+body.page-vision .side-nav a { color: #f1eefe; }

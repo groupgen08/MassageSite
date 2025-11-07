@@ -1,0 +1,247 @@
+/* ---------- Apitherapy page & responsive nav ---------- */
+
+body.page-apitherapy {
+
+    --apitherapy-accent: #7a5b2f;
+    /* --apitherapy-accent: #a88a45; */
+    --apitherapy-text: #111;
+    --apitherapy-hover: rgba(94, 92, 56, 0.08);
+
+    /* фон: соты + мягкий бежевый оверлей */
+    background-color: #fbf6ee;
+    /* используйте картинку пчелиных сот: images/honeycomb.jpg */
+    background-image: url('../images/пчелиные\ соты\ фон2.jpg');
+    /* background-repeat: repeat; */
+    /* background-size: 220px; */
+    background-position: center top;
+    color: #333;
+}
+
+/* затем легкий полупрозрачный слой для читаемости (контейнер поверх фона) */
+.page-apitherapy .container {
+    /* background: rgba(251, 246, 238, 0.85); */
+    background: rgb(251, 246, 238);
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+/* hero header image */
+.apitherapy-hero {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.hero-header {
+    width: 220px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 30px rgba(15, 20, 10, 0.06);
+    flex: 0 0 220px;
+}
+
+body.page-apitherapy .nav-list a {
+    color: var(--apitherapy-text);
+}
+
+body.page-apitherapy .nav-list a:hover {
+    background: var(--apitherapy-hover);
+    color: var(--apitherapy-accent);
+}
+
+.apitherapy-hero .hero-copy {
+    flex: 1;
+}
+
+.apitherapy-hero h1 {
+    margin: 0 0 6px 0;
+    color: #7a5b2f;
+}
+
+.apitherapy-hero .lead {
+    color: #556;
+}
+
+/* контент — читаемость */
+.page-apitherapy .content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(30, 40, 30, 0.03);
+}
+
+/* колонки с перечнем показаний */
+.page-apitherapy .columns {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.page-apitherapy .columns ul {
+    flex: 1;
+    margin: 0;
+    padding-left: 20px;
+    color: #444;
+    line-height: 1.65;
+}
+
+/* галерея */
+.page-apitherapy .gallery {
+    display: flex;
+    gap: 14px;
+    margin: 18px 0 6px;
+    flex-wrap: wrap;
+}
+
+.page-apitherapy .gallery figure {
+    width: calc(50% - 7px);
+    background: #fff;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+}
+
+.page-apitherapy .gallery img {
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+}
+
+.page-apitherapy .gallery figcaption {
+    font-size: 13px;
+    color: #666;
+    margin-top: 8px;
+}
+
+/* CTA */
+.page-apitherapy .btn {
+    background: #D2B48C;
+    color: #231b12;
+    padding: 10px 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* адаптив */
+@media (max-width: 720px) {
+    .apitherapy-hero {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-header {
+        width: 100%;
+        height: 180px;
+        flex: none;
+    }
+
+    .page-apitherapy .gallery figure {
+        width: 100%;
+    }
+}
+
+/* тонкая настройка контраста для фона сот (чтобы не было "ядовитого" желтого) */
+.page-apitherapy::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    /* background: rgba(250, 245, 238, 0.35); */
+    background: none;
+    /* мягкий бежевый оверлей */
+    z-index: 0;
+}
+
+/* intro-row: картинка слева, текст справа — адаптивный флекс */
+.intro-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+/* контейнер фотографии */
+.intro-photo {
+  flex: 0 0 220px;        /* фиксированная колонка для фото */
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.9);
+  border-radius: 10px;
+  padding: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+/* сам img — используем contain */
+.intro-photo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* правая колонка с текстом */
+.intro-text { flex: 1 1 auto; }
+.intro-text h2 { margin-top: 0; }
+
+/* Мобильная версия — фото сверху и чуть шире */
+@media (max-width: 720px) {
+  .intro-row {
+    flex-direction: column;
+    align-items: center; /* теперь всё по центру */
+    /* выравниваем заголовок и текст */
+    /* text-align: center; */
+  }
+
+  .intro-photo {
+    width: 90%;           /* ширина от контейнера, не фиксированная */
+    max-width: 320px;     /* ограничение, чтобы не растягивалось */
+    height: auto;
+    flex: none;
+    padding: 6px;
+    margin: 0 auto;       /* выравнивание по центру */
+  }
+
+  .intro-photo img { 
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .intro-text {
+    padding-top: 10px;
+  }
+}
+
+/* Полупрозрачный фон для футера, чтобы под ним было видно основной фон */
+.page-apitherapy .site-footer {
+  background-color: rgba(251, 246, 238, 0.65); /* молочный цвет с лёгкой прозрачностью */
+  color: #333;                                /* контрастный текст */
+  position: relative;
+  z-index: 999;                               /* чтобы лежал поверх фона */
+  border-top: 1px solid rgba(0,0,0,0.05);
+  backdrop-filter: blur(4px);                 /* лёгкое размытие фона под ним (опционально, красиво смотрится) */
+  -webkit-backdrop-filter: blur(4px);         /* поддержка Safari */
+  padding: 16px 0;                            /* немного отступов */
+}
+
+/* На случай, если ::before всё ещё перекрывает (удаляем его влияние в зоне футера) */
+/* .page-apitherapy::before { */
+  /* если ты хочешь полностью убрать оверлей — раскомментируй следующую строку */
+  /* display: none; */
+/* } */
+
+/* Если футер всё ещё частично прозрачен из-за родительских RGBA,
+   можно сделать дополнительный «щит» внутри футера: */
+.page-apitherapy .site-footer .footer-inner {
+  background: transparent;  /* обычно не нужно, но можно создать вложенный блок при необходимости */
+}
