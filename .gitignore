@@ -1,1 +1,5 @@
-./.idea
+# Зависимости Node.js
+node_modules/
+
+# Выходная папка Eleventy
+_site/
