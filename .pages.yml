@@ -109,6 +109,7 @@ content:
       - name: "gallery"
         label: "Галерея"
         type: "list" # Список
+        item_label: "{{ caption }}" # <--- ДОБАВЛЕНО: Используем подпись как заголовок элемента
         fields: # Поля для каждого элемента списка
           - { name: "image_src", label: "Изображение", type: "image" }
           - { name: "alt", label: "Alt текст", type: "string" }
