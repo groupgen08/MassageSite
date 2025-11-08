@@ -1,0 +1,112 @@
+# .pages.yml
+# Конфигурация Pages CMS для сайта The Fulcrum
+
+# Указываем, куда загружать новые изображения
+media_folder: "images"
+# Указываем, какой префикс использовать для путей к изображениям
+public_folder: "images"
+
+# Определяем коллекцию "Страницы"
+collections:
+  - name: "pages"
+    label: "Страницы сайта"
+    files:
+      # --- 1. Главная страница (Видение лидера) ---
+      - name: "index"
+        label: "Главная (Видение лидера)"
+        file: "index.html"
+        fields:
+          - { label: "Заголовок (SEO)", name: "title", widget: "string", selector: "head > title" }
+          - label: "Главный блок (Hero)"
+            name: "hero"
+            widget: "object"
+            selector: "section.hero"
+            fields:
+              - { label: "Изображение (куб)", name: "image", widget: "image", selector: ".hero-image", get_value: "src", set_value: "src" }
+              - { label: "Alt текст (для SEO)", name: "alt", widget: "string", selector: ".hero-image", get_value: "alt", set_value: "alt" }
+              - { label: "Заголовок H1", name: "h1", widget: "string", selector: ".hero-text h1" }
+              - { label: "Подзаголовок (Lead)", name: "lead", widget: "text", selector: ".hero-text .lead" }
+          - label: "Основной контент (Манифест)"
+            name: "content"
+            widget: "markdown"
+            selector: "article.content"
+            hint: "Редактирование основного текстового блока: Здоровье, Философия, О проекте и т.д."
+          - label: "Секция 'Регуляция'"
+            name: "regulation"
+            widget: "markdown"
+            selector: "section.regulation"
+            hint: "Редактирование блока о биологической и психологической регуляции."
+
+      # --- 2. Холистический подход ---
+      - name: "holistic"
+        label: "Холистический подход"
+        file: "holistic.html"
+        fields:
+          - { label: "Заголовок (SEO)", name: "title", widget: "string", selector: "head > title" }
+          - label: "Верхнее изображение (массаж)"
+            name: "hero_image"
+            widget: "object"
+            selector: ".massage-image-block"
+            fields:
+              - { label: "Изображение", name: "image", widget: "image", selector: ".hero-image", get_value: "src", set_value: "src" }
+              - { label: "Alt текст", name: "alt", widget: "string", selector: ".hero-image", get_value: "alt", set_value: "alt" }
+          - label: "Карточка автора"
+            name: "author"
+            widget: "object"
+            selector: "aside.content-author"
+            fields:
+              - { label: "Имя автора", name: "author_name", widget: "string", selector: "#author-name" }
+              - { label: "Должность/Роль", name: "author_role", widget: "string", selector: ".author-role" }
+              - { label: "Фото автора", name: "author_photo", widget: "image", selector: ".author-photo", get_value: "src", set_value: "src" }
+              - { label: "Alt текст фото", name: "author_photo_alt", widget: "string", selector: ".author-photo", get_value: "alt", set_value: "alt" }
+          - label: "Основной контент статьи (HTML)"
+            name: "content"
+            widget: "markdown"
+            selector: "article.content"
+            hint: "ВНИМАНИЕ: Этот блок редактирует всю статью, включая H1, подзаголовок и вводный текст. Будьте осторожны, чтобы не повредить внутреннюю структуру."
+
+      # --- 3. Апитерапия ---
+      - name: "apitherapy"
+        label: "Апитерапия"
+        file: "apitherapy.html"
+        fields:
+          - { label: "Заголовок (SEO)", name: "title", widget: "string", selector: "head > title" }
+          - label: "Шапка страницы (Hero)"
+            name: "hero"
+            widget: "object"
+            selector: "section.apitherapy-hero"
+            fields:
+              - { label: "Изображение (шапка)", name: "image", widget: "image", selector: ".hero-header", get_value: "src", set_value: "src" }
+              - { label: "Alt текст", name: "alt", widget: "string", selector: ".hero-header", get_value: "alt", set_value: "alt" }
+              - { label: "Заголовок H1", name: "h1", widget: "string", selector: ".hero-copy h1" }
+              - { label: "Подзаголовок", name: "lead", widget: "text", selector: ".hero-copy .lead" }
+          - label: "Вводный блок (с фото)"
+            name: "intro"
+            widget: "object"
+            selector: "section.intro-row"
+            fields:
+              - { label: "Фото", name: "photo", widget: "image", selector: ".intro-photo img", get_value: "src", set_value: "src" }
+              - { label: "Alt текст фото", name: "photo_alt", widget: "string", selector: ".intro-photo img", get_value: "alt", set_value: "alt" }
+              - { label: "Текст введения (HTML)", name: "text", widget: "markdown", selector: ".intro-text" }
+          - label: "Секция 'Перечень сфер'"
+            name: "conditions"
+            widget: "markdown"
+            selector: "section.conditions"
+            hint: "Редактирование блока с двумя колонками."
+          - label: "Секция 'Как это работает'"
+            name: "how_it_works"
+            widget: "markdown"
+            selector: "section.how-it-works"
+          - label: "Галерея"
+            name: "gallery"
+            widget: "list"
+            selector: "section.gallery"
+            item_selector: "figure"
+            fields:
+              - { label: "Изображение", name: "image", widget: "image", selector: "img", get_value: "src", set_value: "src" }
+              - { label: "Alt текст", name: "alt", widget: "string", selector: "img", get_value: "alt", set_value: "alt" }
+              - { label: "Подпись", name: "caption", widget: "string", selector: "figcaption" }
+          - label: "Секция 'Важно (безопасность)'"
+            name: "notes"
+            widget: "markdown"
+            selector: "section.notes"
