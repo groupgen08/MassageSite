@@ -60,11 +60,12 @@ content:
           - { name: "photo_alt", label: "Alt текст фото", type: "string" }
       # --- ВАЖНЫЕ ИСПРАВЛЕНИЯ (см. ниже) ---
       - name: "intro"
-        label: "Введение (левая колонка)"
+        label: "Введение (правая колонка)"
         type: "object"
         fields:
           - { name: "h1", label: "Заголовок H1", type: "string" }
           - { name: "lead", label: "Подзаголовок", type: "text" }
+          - { name: "h2", label: "Заголовок H2", type: "string" }
           - { name: "intro_text", label: "Текст введения", type: "text" }
       # ---
       - name: "content_body"
