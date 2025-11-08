@@ -1,0 +1,77 @@
+---
+permalink: "holistic.html"
+---
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ holistic.title }}</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/holistic.css" />
+</head>
+<body class="page-holistic">
+
+  <header class="site-header">
+    <div class="nav">
+        <a class="nav-logo" href="index.html">The Fulcrum</a>
+        <ul class="nav-list">
+        <li><a href="index.html">Видение лидера</a></li>
+        <li><a href="holistic.html" class="active">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+        </ul>
+                <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
+        ☰
+        </button>
+    </div>
+
+        <nav class="side-nav" aria-hidden="true">
+      <button class="side-close" aria-label="Закрыть меню">✕</button>
+      <ul>
+        <li><a href="index.html">Видение лидера</a></li>
+        <li><a href="holistic.html">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="massage-image-block">
+        <img src="{{ holistic.hero_image.src }}" alt="{{ holistic.hero_image.alt }}" class="hero-image" />
+    </div>
+
+    <article class="content">
+
+        <div class="content-row">
+            <aside class="content-author" aria-labelledby="author-name">
+                <div class="author-info">
+                    <div id="author-name" class="author-name">{{ holistic.author.name }}</div>
+                    <div class="author-role">{{ holistic.author.role }}</div>
+                </div>
+                <img src="{{ holistic.author.photo_src }}" alt="{{ holistic.author.photo_alt }}" class="author-photo" />
+            </aside>
+
+            <div class="content-left">
+              <div class="hero-text">
+                  <h1>{{ holistic.intro.h1 }}</h1>
+                  
+                  <p>{{ holistic.intro.lead }}</p>
+              </div>
+              
+              <h2>Краткое введение</h2> <p>{{ holistic.intro.intro_text }}</p>
+          </div>
+        </div>
+
+    {{ holistic.content_body | safe }}
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© The Fulcrum — Портал здоровья</p>
+  </footer>
+
+  <script src="script/menu.js"></script>
+
+</body>
+</html>

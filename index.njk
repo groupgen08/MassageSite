@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ index.title }}</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/vision.css" />
+</head>
+<body class="page-vision">
+
+  <header class="site-header">
+    <div class="nav">
+      <a class="nav-logo" href="index.html">The Fulcrum</a>
+      <ul class="nav-list">
+        <li><a href="index.html" class="active">Видение лидера</a></li>
+        <li><a href="holistic.html">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+      </ul>
+
+            <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
+      ☰
+      </button>
+    </div>
+
+        <nav class="side-nav" aria-hidden="true">
+      <button class="side-close" aria-label="Закрыть меню">✕</button>
+      <ul>
+        <li><a href="index.html">Видение лидера</a></li>
+        <li><a href="holistic.html">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <img src="{{ index.hero.image }}" alt="{{ index.hero.alt }}" class="hero-image" />
+      <div class="hero-text">
+        <h1>{{ index.hero.h1 }}</h1>
+        <p class="lead">{{ index.hero.lead }}</p>
+      </div>
+    </section>
+
+    <article class="content">
+      {{ index.content_body | safe }}
+    </article>
+
+    <section class="regulation">
+        {{ index.regulation_body | safe }}
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>© The Fulcrum — Портал здоровья</p>
+  </footer>
+
+  <script src="script/menu.js"></script>
+
+</body>
+</html>
