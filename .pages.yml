@@ -36,14 +36,15 @@ content:
         list: true # Это массив (Repeater)
         fields:
           # ВЫБОР ТИПА БЛОКА (Вместо type: string/rich-text)
+          # СТАЛО: (Используем явный формат label/value, чтобы Pages CMS корректно построил список)
           - name: "type"
             label: "Тип контентного блока"
             type: "select"
             options:
-              - "heading_2"
-              - "heading_3"
-              - "paragraph"
-              - "unordered_list"
+              - { label: "Заголовок H2", value: "heading_2" }
+              - { label: "Заголовок H3", value: "heading_3" }
+              - { label: "Параграф (Текст)", value: "paragraph" }
+              - { label: "Неупорядоченный список", value: "unordered_list" }
           
           # ПОЛЕ ДЛЯ ЗАГОЛОВКОВ (H2, H3) и АБЗАЦЕВ (Paragraph)
           - name: "text"
