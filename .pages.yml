@@ -30,31 +30,34 @@ content:
           - { name: "h1", label: "Заголовок H1", type: "string" }
           - { name: "lead", label: "Подзаголовок", type: "text" }
       
+# --- ИСПРАВЛЕННЫЙ БЛОК content_blocks ---
       - name: "content_blocks"
         label: "Основной контент (Блоки)"
         type: "object"
         list: true
         fields:
-          # ВЫБОР ТИПА БЛОКА (Select) - здесь все правильно
+          # 1. КРИТИЧЕСКОЕ ИСПРАВЛЕНИЕ: Оборачиваем опции в ключ 'values'
           - name: "type"
             label: "Тип контентного блока"
             type: "select"
             options:
-              - { label: "Заголовок H2", value: "heading_2" }
-              - { label: "Заголовок H3", value: "heading_3" }
-              - { label: "Параграф (Текст)", value: "paragraph" }
-              - { label: "Неупорядоченный список", value: "unordered_list" }
+              values: # <-- Добавлено для строгого синтаксиса
+                - { label: "Заголовок H2", value: "heading_2" }
+                - { label: "Заголовок H3", value: "heading_3" }
+                - { label: "Параграф (Текст)", value: "paragraph" }
+                - { label: "Неупорядоченный список", value: "unordered_list" }
           
-          # ПОЛЕ ДЛЯ ЗАГОЛОВКОВ И АБЗАЦЕВ
+          # 2. Поле для H2/H3/Paragraph
           - name: "text"
             label: "Текст/Заголовок"
             type: "rich-text"
             
-          # ПОЛЕ ДЛЯ СПИСКОВ (Unordered List)
+          # 3. Поле для Unordered List
           - name: "items"
             label: "Элементы списка"
-            type: "string" # <-- ИСПРАВЛЕНО! Было: type: "text"
+            type: "string" # Это должно быть string, а не text
             list: true
+      # ----------------------------------------------------
       
       - name: "manifest_author"
         label: "Подпись автора"
