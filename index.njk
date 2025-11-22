@@ -17,10 +17,7 @@
         <li><a href="holistic.html">Холистический подход</a></li>
         <li><a href="apitherapy.html">Апитерапия</a></li>
       </ul>
-
-      <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
-      ☰
-      </button>
+      <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">☰</button>
     </div>
 
     <nav class="side-nav" aria-hidden="true">
@@ -42,44 +39,71 @@
       </div>
     </section>
 
+    {# Открываем основную статью #}
     <article class="content">
-        {# Запускаем цикл по новому массиву блоков #}
-        {% for block in index.content_blocks %}
-            {% if block.type == 'heading_2' %}
-                <h2>{{ block.text }}</h2>
-            {% elif block.type == 'heading_3' %}
-                <h3>{{ block.text }}</h3>
-            {% elif block.type == 'paragraph' %}
-                {# Фильтр | safe нужен, чтобы Nunjucks корректно отобразил жирный текст (<b>) внутри параграфа #}
-                <p>{{ block.text | safe }}</p>
-            {% elif block.type == 'unordered_list' %}
-                <ul>
-                    {% for item in block.items %}
-                        <li>{{ item | safe }}</li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                {% endif %}
-        {% endfor %}
-        
-        {# Автор остается на месте #}
-        {% if index.manifest_author %}
-        <p class="author">{{ index.manifest_author }}</p>
+      
+      {% for block in index.content_blocks %}
+
+        {# --- ОБЫЧНЫЕ БЛОКИ --- #}
+        {% if block.type == 'h2' %}
+           <h2>{{ block.text }}</h2>
+
+        {% elif block.type == 'h3' %}
+           <h3>{{ block.text }}</h3>
+
+        {% elif block.type == 'paragraph' %}
+           {# safe нужен, чтобы работали <b> внутри текста, если они есть #}
+           <p>{{ block.text | safe }}</p>
+
+        {% elif block.type == 'list' %}
+           <ul>
+             {% for item in block.items %}
+               <li>{{ item | safe }}</li>
+             {% endfor %}
+           </ul>
+
+        {# --- СЕКЦИЯ РЕГУЛЯЦИЯ (Магия смены контейнера) --- #}
+        {% elif block.type == 'regulation_header' %}
+           {# Если мы встретили заголовок Регуляции, закрываем article и открываем section #}
+    </article> 
+           
+           <section class="regulation">
+           <h2>{{ block.text }}</h2>
+
+        {% elif block.type == 'regulation_card' %}
+           {# Специальная верстка для карточек регуляции #}
+           <div class="reg-block">
+              <h3>{{ block.text }}</h3>
+              <ul>
+                {% for item in block.items %}
+                  <li>{{ item | safe }}</li>
+                {% endfor %}
+              </ul>
+           </div>
+
         {% endif %}
-    </article>
 
-    <section class="regulation">
-        {# Вводный текст регуляции #}
-        {{ index.regulation_intro | safe }}
+      {% endfor %}
 
-        {# Цикл: создаем reg-block для каждого элемента из массива #}
-        {% for block in index.regulation_blocks %}
-        <div class="reg-block">
-            <h3>{{ block.title }}</h3>
-            {{ block.content | safe }}
-        </div>
-        {% endfor %}
-    </section>
+      {# Проверяем: если последний блок был частью регуляции, нужно закрыть section.
+         Иначе закрываем article (который мы могли закрыть выше, поэтому здесь нужна аккуратность). 
+         
+         Простой хак для Nunjucks: Браузер сам закроет незакрытые теги, но для порядка: 
+      #}
+      
+      {# Если мы внутри секции регуляции, закрываем её #}
+      {% if index.content_blocks | selectattr("type", "equalto", "regulation_header") | list | length > 0 %}
+        </section>
+      {% else %}
+        </article>
+      {% endif %}
+
+      {# Автор выводится отдельно, если нужно #}
+        {% if index.manifest_author %}
+            <!-- <div class="container"> -->
+                <p class="author">{{ index.manifest_author }}</p>
+            <!-- </div> -->
+        {% endif %}
 
   </main>
 
