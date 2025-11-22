@@ -18,12 +18,12 @@
         <li><a href="apitherapy.html">Апитерапия</a></li>
       </ul>
 
-            <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
       ☰
       </button>
     </div>
 
-        <nav class="side-nav" aria-hidden="true">
+    <nav class="side-nav" aria-hidden="true">
       <button class="side-close" aria-label="Закрыть меню">✕</button>
       <ul>
         <li><a href="index.html">Видение лидера</a></li>
@@ -43,11 +43,42 @@
     </section>
 
     <article class="content">
-      {{ index.content_body | safe }}
+        {# Запускаем цикл по новому массиву блоков #}
+        {% for block in index.content_blocks %}
+            {% if block.type == 'heading_2' %}
+                <h2>{{ block.text }}</h2>
+            {% elif block.type == 'heading_3' %}
+                <h3>{{ block.text }}</h3>
+            {% elif block.type == 'paragraph' %}
+                {# Фильтр | safe нужен, чтобы Nunjucks корректно отобразил жирный текст (<b>) внутри параграфа #}
+                <p>{{ block.text | safe }}</p>
+            {% elif block.type == 'unordered_list' %}
+                <ul>
+                    {% for item in block.items %}
+                        <li>{{ item | safe }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                {% endif %}
+        {% endfor %}
+        
+        {# Автор остается на месте #}
+        {% if index.manifest_author %}
+        <p class="author">{{ index.manifest_author }}</p>
+        {% endif %}
     </article>
 
     <section class="regulation">
-        {{ index.regulation_body | safe }}
+        {# Вводный текст регуляции #}
+        {{ index.regulation_intro | safe }}
+
+        {# Цикл: создаем reg-block для каждого элемента из массива #}
+        {% for block in index.regulation_blocks %}
+        <div class="reg-block">
+            <h3>{{ block.title }}</h3>
+            {{ block.content | safe }}
+        </div>
+        {% endfor %}
     </section>
 
   </main>
