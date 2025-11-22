@@ -16,41 +16,25 @@ content:
   # --- ФАЙЛ 1: Главная (Видение лидера) ---
   - name: "index"
     label: "Главная (Видение лидера)"
-    type: "file"
-    path: "_data/index.json"
-    format: "json"
-    fields:
-      - { name: "title", label: "Заголовок (SEO)", type: "string" }
+    type: "file"                  
+    path: "_data/index.json"      
+    format: "json"                
+    fields:                       
+      - { name: "title", label: "Заголовок (SEO)", type: "string" } 
       - name: "hero"
         label: "Главный блок (Hero)"
-        type: "object"
+        type: "object"            
         fields:
-          - { name: "image", label: "Изображение (куб)", type: "image" }
+          - { name: "image", label: "Изображение (куб)", type: "image" } 
           - { name: "alt", label: "Alt текст", type: "string" }
           - { name: "h1", label: "Заголовок H1", type: "string" }
           - { name: "lead", label: "Подзаголовок", type: "text" }
-      
       - name: "content_body"
         label: "Основной контент (Манифест)"
+        type: "rich-text"         
+      - name: "regulation_body"
+        label: "Секция 'Регуляция'"
         type: "rich-text"
-      
-      - name: "manifest_author"
-        label: "Подпись автора"
-        type: "string"
-        description: "Имя и дата внизу манифеста"
-
-      - name: "regulation_intro"
-        label: "Регуляция: Введение"
-        type: "rich-text"
-        description: "Текст перед блоками (начинается с Заголовка Регуляция)"
-
-      - name: "regulation_blocks"
-        label: "Регуляция: Блоки"
-        type: "object"
-        list: true # Это создает список, в который можно добавлять новые элементы
-        fields:
-          - { name: "title", label: "Заголовок блока", type: "string" }
-          - { name: "content", label: "Содержимое списка", type: "rich-text" }
 
   # --- ФАЙЛ 2: Холистический подход ---
   - name: "holistic"
