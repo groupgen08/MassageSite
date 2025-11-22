@@ -33,10 +33,9 @@ content:
       - name: "content_blocks"
         label: "Основной контент (Блоки)"
         type: "object"
-        list: true # Это массив (Repeater)
+        list: true
         fields:
-          # ВЫБОР ТИПА БЛОКА (Вместо type: string/rich-text)
-          # СТАЛО: (Используем явный формат label/value, чтобы Pages CMS корректно построил список)
+          # ВЫБОР ТИПА БЛОКА (Select) - здесь все правильно
           - name: "type"
             label: "Тип контентного блока"
             type: "select"
@@ -46,15 +45,15 @@ content:
               - { label: "Параграф (Текст)", value: "paragraph" }
               - { label: "Неупорядоченный список", value: "unordered_list" }
           
-          # ПОЛЕ ДЛЯ ЗАГОЛОВКОВ (H2, H3) и АБЗАЦЕВ (Paragraph)
+          # ПОЛЕ ДЛЯ ЗАГОЛОВКОВ И АБЗАЦЕВ
           - name: "text"
             label: "Текст/Заголовок"
-            type: "rich-text" # Используем rich-text, так как это небольшой, контролируемый кусок
+            type: "rich-text"
             
           # ПОЛЕ ДЛЯ СПИСКОВ (Unordered List)
           - name: "items"
             label: "Элементы списка"
-            type: "text" # Используем "text" или "string", так как каждый элемент — это одна строка
+            type: "string" # <-- ИСПРАВЛЕНО! Было: type: "text"
             list: true
       
       - name: "manifest_author"
