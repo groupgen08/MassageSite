@@ -1,12 +1,11 @@
 {
   "title": "The Fulcrum — Видение лидера",
   "hero": {
-    "image": "images/cube.jpg",
+    "image": "/images/cube.jpg",
     "alt": "Куб Метатрона",
     "h1": "Видение лидера",
     "lead": "Концепция проекта «The Fulcrum» — портал здоровья и социальной кооперации: миссия, философия и направление."
   },
-  "manifest_author": "Алекс Хрипков — 17.10.2025",
   "content_blocks": [
     {
       "type": "h2",
@@ -23,6 +22,10 @@
         "Душевное (психическое) благополучие: отсутствие болезней и физических дефектов, а также хорошее психологическое состояние.",
         "Социальное благополучие: способность полноценно выполнять социальные функции и участвовать в общественной деятельности."
       ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Новый абзац Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam distinctio voluptatibus, qui eveniet culpa quo repellat earum, at possimus molestiae ipsam alias maxime soluta nesciunt praesentium. Quisquam ipsum commodi fugit."
     },
     {
       "type": "h2",
@@ -101,5 +104,6 @@
         "<strong>Эмоциональная регуляция:</strong> Контроль и управление собственными эмоциональными переживаниями, поддержание их в равновесии и недопущение крайностей."
       ]
     }
-  ]
+  ],
+  "manifest_author": "Алекс Хрипков — 17.10.2025"
 }
