@@ -15,30 +15,26 @@ permalink: "apitherapy.html"
   <header class="site-header">
     <div class="nav">
       <a class="nav-logo" href="index.html">The Fulcrum</a>
-
-            <ul class="nav-list">
+      <ul class="nav-list">
         <li><a href="index.html">Видение лидера</a></li>
         <li><a href="holistic.html">Холистический подход</a></li>
         <li><a href="apitherapy.html" class="active">Апитерапия</a></li>
       </ul>
-
-            <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
-        ☰
-      </button>
+      <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">☰</button>
     </div>
 
-        <nav class="side-nav" aria-hidden="true">
+    <nav class="side-nav" aria-hidden="true">
       <button class="side-close" aria-label="Закрыть меню">✕</button>
       <ul>
         <li><a href="index.html">Видение лидера</a></li>
         <li><a href="holistic.html">Холистический подход</a></li>
-        <li><a href="apitherapy.html" class="active">Апитерапия</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="container">
-        <section class="apitherapy-hero">
+    <section class="apitherapy-hero">
       <img src="{{ apitherapy.hero.image }}" alt="{{ apitherapy.hero.alt }}" class="hero-header" />
       <div class="hero-copy">
         <h1>{{ apitherapy.hero.h1 }}</h1>
@@ -47,36 +43,82 @@ permalink: "apitherapy.html"
     </section>
 
     <article class="content">
+      {# --- Блок Intro (фиксированный) --- #}
       <section class="intro-row">
         <figure class="intro-photo">
             <img src="{{ apitherapy.intro.photo.src }}" alt="{{ apitherapy.intro.photo.alt }}" />
         </figure>
 
         <div class="intro-text">
-            {{ apitherapy.intro.text | safe }}
+            <h2>{{ apitherapy.intro.heading }}</h2>
+            <p>{{ apitherapy.intro.text }}</p>
         </div>
       </section>
 
-      <section class="conditions">
-        {{ apitherapy.conditions_body | safe }}
-      </section>
+      {# --- ДИНАМИЧЕСКИЕ БЛОКИ --- #}
+      {% if apitherapy.page_blocks %}
+      {% for block in apitherapy.page_blocks %}
 
-      <section class="how-it-works">
-        {{ apitherapy.how_it_works_body | safe }}
-      </section>
+{# 1. Секция: Перечень сфер (Список с колонками) #}
+        {% if block.type == 'conditions_section' %}
+          <section class="conditions">
+            <h3>{{ block.title }}</h3>
+            
+            {# 1. Вычисляем середину. Округляем вверх (ceil), чтобы левая колонка была длиннее, если число нечетное #}
+            {# В Nunjucks нет math.ceil из коробки, но можно использовать round(0, 'ceil') #}
+            {% set mid_point = (block.items.length / 2) | round(0, 'ceil') %} 
+            
+            <div class="columns">
+              
+              {# --- СПИСОК 1 (Левая колонка) --- #}
+              {# Берем элементы с индекса 0 до середины #}
+              <ul>
+                {% for item in block.items.slice(0, mid_point) %}
+                  <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+              
+              {# --- СПИСОК 2 (Правая колонка) --- #}
+              {# Берем элементы от середины до конца #}
+              <ul>
+                {% for item in block.items.slice(mid_point) %}
+                  <li>{{ item }}</li>
+                {% endfor %}
+              </ul>
+              
+            </div>
+          </section>
 
-      <section class="gallery">
-        {% for item in apitherapy.gallery %}
-        <figure>
-          <img src="{{ item.image_src }}" alt="{{ item.alt }}" />
-          <figcaption>{{ item.caption }}</figcaption>
-        </figure>
-        {% endfor %}
-      </section>
+        {# 2. Секция: Как это работает (Текст) #}
+        {% elif block.type == 'how_it_works_section' %}
+          <section class="how-it-works">
+            <h3>{{ block.title }}</h3>
+            <p>{{ block.text | safe }}</p>
+          </section>
 
-      <section class="notes">
-        {{ apitherapy.notes_body | safe }}
-      </section>
+        {# 3. Секция: Галерея #}
+        {% elif block.type == 'gallery_section' %}
+          <section class="gallery">
+            {% for img in block.gallery_items %}
+            <figure>
+              <img src="{{ img.image_src }}" alt="{{ img.alt }}" />
+              <figcaption>{{ img.caption }}</figcaption>
+            </figure>
+            {% endfor %}
+          </section>
+
+        {# 4. Секция: Важно/Заметки (Текст) #}
+        {% elif block.type == 'notes_section' %}
+          <section class="notes">
+            <h3>{{ block.title }}</h3>
+            <p>{{ block.text | safe }}</p>
+          </section>
+
+        {% endif %}
+
+      {% endfor %}
+      {% endif %}
+      {# --- КОНЕЦ БЛОКОВ --- #}
 
     </article>
   </main>

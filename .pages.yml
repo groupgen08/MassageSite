@@ -141,7 +141,7 @@ content:
             type: "string"
             list: true
 
-  # --- ФАЙЛ 3: Апитерапия ---
+# --- ФАЙЛ 3: Апитерапия ---
   - name: "apitherapy"
     label: "Апитерапия"
     type: "file"
@@ -149,6 +149,7 @@ content:
     format: "json"
     fields:
       - { name: "title", label: "Заголовок (SEO)", type: "string" }
+      
       - name: "hero"
         label: "Шапка страницы"
         type: "object"
@@ -157,6 +158,7 @@ content:
           - { name: "alt", label: "Alt текст", type: "string" }
           - { name: "h1", label: "Заголовок H1", type: "string" }
           - { name: "lead", label: "Подзаголовок", type: "text" }
+          
       - name: "intro"
         label: "Вводный блок"
         type: "object"
@@ -167,24 +169,50 @@ content:
             fields:
               - { name: "src", label: "Изображение", type: "image" }
               - { name: "alt", label: "Alt текст", type: "string" }
-          - { name: "text", label: "Текст введения", type: "rich-text" }
-      - name: "conditions_body"
-        label: "Секция 'Перечень сфер'"
-        type: "rich-text"
-      - name: "how_it_works_body"
-        label: "Секция 'Как это работает'"
-        type: "rich-text"
-      - name: "gallery"
-        label: "Галерея"
-        type: "object" # Меняем на type: object
-        list: # Используем ключевое слово list как объект для настроек
-          collapsible:
-            # summary — это задокументированный способ задания заголовка для элементов-объектов
-            summary: "🖼️ {fields.caption} ({fields.image_src})"
-        fields: # Поля для каждого элемента списка
-          - { name: "image_src", label: "Изображение", type: "image" }
-          - { name: "alt", label: "Alt текст", type: "string" }
-          - { name: "caption", label: "Подпись", type: "string" }
-      - name: "notes_body"
-        label: "Секция 'Важно (безопасность)'"
-        type: "rich-text"
+          - { name: "heading", label: "Заголовок введения", type: "string" }
+          - { name: "text", label: "Текст введения", type: "text" }
+
+      # --- КОНСТРУКТОР БЛОКОВ (Вместо старых полей body) ---
+      - name: "page_blocks"
+        label: "Секции страницы"
+        type: "object"
+        list: true
+        fields:
+          # 1. Тип секции
+          - name: "type"
+            label: "🟢 ТИП СЕКЦИИ"
+            type: "select"
+            default: "conditions_section"
+            options:
+              values:
+                - { label: "Секция: Перечень сфер (Список)", value: "conditions_section" }
+                - { label: "Секция: Как это работает (Текст)", value: "how_it_works_section" }
+                - { label: "Секция: Галерея (Картинки)", value: "gallery_section" }
+                - { label: "Секция: Важно/Заметки (Текст)", value: "notes_section" }
+
+          # 2. Заголовок секции
+          - name: "title"
+            label: "🏷 Заголовок секции"
+            type: "string"
+
+          # 3. Текст секции (для How it Works и Notes)
+          - name: "text"
+            label: "📝 Текст (для текстовых секций)"
+            type: "text"
+
+          # 4. Список сфер (для Conditions)
+          - name: "items"
+            label: "📋 Список сфер (только для Conditions)"
+            type: "string"
+            list: true
+            
+          # 5. Галерея (для Gallery)
+          - name: "gallery_items"
+            label: "🖼 Элементы галереи (только для Gallery)"
+            type: "object"
+            list:
+              summary: "Фото: {fields.caption}"
+            fields:
+              - { name: "image_src", label: "Изображение", type: "image" }
+              - { name: "alt", label: "Alt текст", type: "string" }
+              - { name: "caption", label: "Подпись", type: "string" }
