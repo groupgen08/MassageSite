@@ -86,12 +86,14 @@ content:
     format: "json"
     fields:
       - { name: "title", label: "Заголовок (SEO)", type: "string" }
+      
       - name: "hero_image"
         label: "Верхнее изображение"
         type: "object"
         fields:
           - { name: "src", label: "Изображение", type: "image" }
           - { name: "alt", label: "Alt текст", type: "string" }
+          
       - name: "author"
         label: "Карточка автора"
         type: "object"
@@ -100,7 +102,7 @@ content:
           - { name: "role", label: "Должность/Роль", type: "string" }
           - { name: "photo_src", label: "Фото автора", type: "image" }
           - { name: "photo_alt", label: "Alt текст фото", type: "string" }
-      # --- ВАЖНЫЕ ИСПРАВЛЕНИЯ (см. ниже) ---
+          
       - name: "intro"
         label: "Введение (правая колонка)"
         type: "object"
@@ -109,11 +111,35 @@ content:
           - { name: "lead", label: "Подзаголовок", type: "text" }
           - { name: "h2", label: "Заголовок H2", type: "string" }
           - { name: "intro_text", label: "Текст введения", type: "text" }
-      # ---
-      - name: "content_body"
-        label: "Основной контент (статья)"
-        type: "rich-text"
-        description: "Весь текст, начиная с 'Основных принципов'"
+      
+      # --- КОНСТРУКТОР БЛОКОВ (Вместо content_body) ---
+      - name: "page_blocks"
+        label: "Основной контент (Конструктор)"
+        type: "object"
+        list: true
+        fields:
+          # 1. Тип блока (Используем рабочий синтаксис options: values:)
+          - name: "type"
+            label: "🟢 ТИП БЛОКА"
+            type: "select"
+            default: "paragraph"
+            options:
+              values:
+                - { label: "Заголовок H2", value: "h2" }
+                - { label: "Заголовок H3", value: "h3" }
+                - { label: "Параграф (Текст)", value: "paragraph" }
+                - { label: "Маркированный список", value: "list" }
+          
+          # 2. Текстовое поле
+          - name: "text"
+            label: "📝 Текст (для заголовков и параграфов)"
+            type: "text" # Многострочное поле
+            
+          # 3. Элементы списка
+          - name: "items"
+            label: "📋 Элементы списка (ТОЛЬКО для списков)"
+            type: "string"
+            list: true
 
   # --- ФАЙЛ 3: Апитерапия ---
   - name: "apitherapy"

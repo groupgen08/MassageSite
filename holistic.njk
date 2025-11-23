@@ -62,7 +62,31 @@ permalink: "holistic.html"
           </div>
         </div>
 
-    {{ holistic.content_body | safe }}
+        {# Проверочный код #}
+        {# --- НАЧАЛО ДИНАМИЧЕСКИХ БЛОКОВ --- #}
+        {% for block in holistic.page_blocks %}
+            
+            {% if block.type == 'h2' %}
+                <h2>{{ block.text }}</h2>
+
+            {% elif block.type == 'h3' %}
+                <h3>{{ block.text }}</h3>
+
+            {% elif block.type == 'paragraph' %}
+                {# safe нужен для отображения <b> внутри текста #}
+                <p>{{ block.text | safe }}</p>
+
+            {% elif block.type == 'list' %}
+                <ul>
+                    {% for item in block.items %}
+                        <li>{{ item | safe }}</li>
+                    {% endfor %}
+                </ul>
+
+            {% endif %}
+
+        {% endfor %}
+        {# --- КОНЕЦ ДИНАМИЧЕСКИХ БЛОКОВ --- #}
 
     </article>
   </main>
