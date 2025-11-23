@@ -97,7 +97,7 @@ body.page-apitherapy .nav-list a:hover {
 }
 
 .page-apitherapy .gallery figure {
-    width: calc(50% - 7px);
+    width: calc(40% - 7px);
     background: #fff;
     border-radius: 10px;
     padding: 8px;
