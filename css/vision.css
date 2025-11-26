@@ -8,7 +8,7 @@ body.page-vision .site-footer {
 body.page-vision {
     --vision-accent: #fff;
     --vision-text: #fff;
-    --vision-hover: rgba(32, 32, 32, 0.45);
+    --vision-hover: #1b0938;
     background-color: #1b0938;
     /* глубокий фиалковый оттенок */
     color: #f3f3f7;

@@ -216,3 +216,86 @@ content:
               - { name: "image_src", label: "Изображение", type: "image" }
               - { name: "alt", label: "Alt текст", type: "string" }
               - { name: "caption", label: "Подпись", type: "string" }
+
+  # --- ФАЙЛ 4: Фитотерапия ---
+  - name: "phytotherapy"
+    label: "Фитотерапия"
+    type: "file"
+    path: "_data/phytotherapy.json"
+    format: "json"
+    fields:
+      - { name: "title", label: "Заголовок страницы (SEO)", type: "string" }
+      
+      - name: "hero"
+        label: "Шапка страницы"
+        type: "object"
+        fields:
+          - { name: "image", label: "Фон шапки", type: "image" }
+          - { name: "alt", label: "Alt текст", type: "string" }
+          - { name: "h1", label: "Заголовок H1", type: "string" }
+          - { name: "lead", label: "Подзаголовок", type: "text" }
+      
+      - name: "doctor"
+        label: "Данные врача"
+        type: "object"
+        fields:
+          - { name: "photo", label: "Фото врача", type: "image" }
+          - { name: "name", label: "Имя", type: "string" }
+          - { name: "role", label: "Должность", type: "string" }
+          
+      - name: "intro_text"
+        label: "Вводный текст (Манифест)"
+        type: "object"
+        fields:
+          - { name: "heading", label: "Заголовок введения", type: "string" }
+          - { name: "p1", label: "Абзац 1", type: "text" }
+          - { name: "p2", label: "Абзац 2", type: "text" }
+          - { name: "quote", label: "Цитата (выделенная)", type: "text" }
+
+      # --- КОНСТРУКТОР БЛОКОВ ---
+      - name: "page_blocks"
+        label: "Контент страницы"
+        type: "object"
+        list: true
+        fields:
+          - name: "type"
+            label: "🟢 ТИП БЛОКА"
+            type: "select"
+            default: "paragraph"
+            options:
+              values:
+                - { label: "Заголовок H2", value: "h2" }
+                - { label: "Абзац текста", value: "paragraph" }
+                - { label: "СЕТКА ПРОГРАММЫ (Карточки)", value: "program_section" }
+                - { label: "БЛОК КОНТАКТОВ (CTA)", value: "cta_block" }
+
+          # Текст для простых блоков
+          - name: "text"
+            label: "📝 Текст (для H2 и Параграфов)"
+            type: "text"
+            
+          # Данные для Сетки Программы
+          - name: "items"
+            label: "🌿 Шаги программы (Только для Сетки)"
+            type: "object"
+            list:
+              summary: "Шаг {fields.step_num}: {fields.action}"
+            fields:
+              - { name: "step_num", label: "Номер шага", type: "string" }
+              - { name: "action", label: "Действие (Заголовок)", type: "string" }
+              - { name: "result", label: "Результат (Описание)", type: "text" }
+              - { name: "plus_need", label: "+ Надо (Дополнительно)", type: "string" }
+
+          # Данные для CTA
+          - name: "title" 
+            label: "Заголовок CTA" 
+            type: "string"
+          - name: "contact_label"
+            label: "Текст кнопки"
+            type: "string"
+          - name: "contact_link"
+            label: "Ссылка (https://wa.me/...)"
+            type: "string"
+          - name: "phone"
+            label: "Телефон (текст)"
+            type: "string"

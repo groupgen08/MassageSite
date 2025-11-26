@@ -140,7 +140,8 @@ body {
 }
 
 /* мобильное поведение навигации: скрываем обычный список и показываем гамбургер */
-@media (max-width: 720px) {
+/* @media (max-width: 720px) { */
+@media (max-width: 970px) {
     .nav-list {
         display: none;
     }

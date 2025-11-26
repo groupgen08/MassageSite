@@ -1,0 +1,128 @@
+---
+permalink: "phytotherapy.html"
+---
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ phytotherapy.title }}</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/phytotherapy.css" />
+</head>
+<body class="page-phytotherapy">
+
+  <header class="site-header">
+    <div class="nav">
+      <a class="nav-logo" href="index.html">The Fulcrum</a>
+      <ul class="nav-list">
+        <li><a href="index.html">Видение лидера</a></li>
+        <li><a href="holistic.html">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+        <li><a href="phytotherapy.html" class="active">Фитотерапия</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">☰</button>
+    </div>
+
+    <nav class="side-nav" aria-hidden="true">
+      <button class="side-close" aria-label="Закрыть меню">✕</button>
+      <ul>
+        <li><a href="index.html">Видение лидера</a></li>
+        <li><a href="holistic.html">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+        <li><a href="phytotherapy.html" class="active">Фитотерапия</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    {# --- HERO SECTION --- #}
+    <section class="phyto-hero">
+        <img src="{{ phytotherapy.hero.image }}" alt="{{ phytotherapy.hero.alt }}" class="hero-bg" />
+        <div class="hero-content">
+            <h1>{{ phytotherapy.hero.h1 }}</h1>
+            <p>{{ phytotherapy.hero.lead }}</p>
+        </div>
+    </section>
+
+    <article class="content">
+        
+        {# --- INTRO BLOCK: TEXT + DOCTOR --- #}
+        <section class="phyto-intro">
+            <div class="intro-left">
+                <h2>{{ phytotherapy.intro_text.heading }}</h2>
+                <p>{{ phytotherapy.intro_text.p1 }}</p>
+                <p>{{ phytotherapy.intro_text.p2 }}</p>
+                <blockquote class="highlight-quote">
+                    {{ phytotherapy.intro_text.quote }}
+                </blockquote>
+            </div>
+            <div class="intro-doc">
+                <figure class="doctor-card">
+                    <img src="{{ phytotherapy.doctor.photo }}" alt="{{ phytotherapy.doctor.alt }}">
+                    <figcaption>
+                        <span class="doc-name">{{ phytotherapy.doctor.name }}</span>
+                        <span class="doc-role">{{ phytotherapy.doctor.role }}</span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        {# --- DYNAMIC BLOCKS --- #}
+        {% if phytotherapy.page_blocks %}
+        {% for block in phytotherapy.page_blocks %}
+
+            {% if block.type == 'h2' %}
+                <h2>{{ block.text }}</h2>
+
+            {% elif block.type == 'paragraph' %}
+                <p>{{ block.text }}</p>
+
+            {# Блок Программы (Сетка карточек) #}
+            {% elif block.type == 'program_section' %}
+                <div class="program-grid">
+                    {% for item in block.items %}
+                    <div class="program-card">
+                        <div class="step-badge">{{ item.step_num }}</div>
+                        <h3 class="step-title">{{ item.action }}</h3>
+                        <div class="step-body">
+                            <p class="step-result">{{ item.result }}</p>
+                            {% if item.plus_need %}
+                            <div class="step-plus">
+                                <strong>+ Надо:</strong> {{ item.plus_need }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            {# Блок CTA (Контакты) #}
+            {% elif block.type == 'cta_block' %}
+                <div class="cta-box">
+                    <h3>{{ block.title }}</h3>
+                    <p>{{ block.text }}</p>
+                    <div class="cta-actions">
+                        <a href="{{ block.contact_link }}" class="btn-whatsapp" target="_blank">{{ block.contact_label }}</a>
+                        <span class="cta-phone">{{ block.phone }}</span>
+                    </div>
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+        {% endif %}
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© The Fulcrum — Портал здоровья</p>
+  </footer>
+
+  <script src="script/menu.js"></script>
+</body>
+</html>
