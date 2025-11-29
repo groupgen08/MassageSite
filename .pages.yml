@@ -308,7 +308,7 @@ content:
     format: "json"
     fields:
       - { name: "title", label: "Заголовок страницы (SEO)", type: "string" }
-      
+
       - name: "hero"
         label: "Шапка страницы"
         type: "object"
@@ -318,7 +318,6 @@ content:
           - { name: "h1", label: "Заголовок H1", type: "string" }
           - { name: "lead", label: "Подзаголовок", type: "text" }
 
-      # --- КОНСТРУКТОР БЛОКОВ ---
       - name: "page_blocks"
         label: "Контент страницы"
         type: "object"
@@ -334,25 +333,28 @@ content:
                 - { label: "Абзац текста", value: "paragraph" }
                 - { label: "Маркированный список", value: "list" }
                 - { label: "📊 Диаграмма энергозатрат", value: "energy_breakdown" }
+                - { label: "🖼️ Фигура (изображение + подпись)", value: "figure" }
+                - { label: "🔬 ATP: молекулярная схема", value: "atp_block" }
+                - { label: "⚖️ Сравнение: гликоген vs жир", value: "compare_glycogen_fat" }
+                - { label: "➡️ Энергетический поток (пошагово)", value: "energy_flow" }
                 - { label: "🔗 Ссылка на источник (Habr)", value: "source_credit" }
                 - { label: "❗ Манифест (Важный текст в конце)", value: "manifesto_block" }
 
-          # --- Поля для простых блоков ---
           - name: "text"
             label: "📝 Текст (для H2, Параграфов и Манифеста)"
             type: "text"
-            
+
           - name: "items"
             label: "📋 Элементы списка (для простого списка)"
             type: "string"
             list: true
 
-          # --- Поля для блока Диаграммы (energy_breakdown) ---
+          # energy_breakdown
           - name: "title"
-            label: "Заголовок диаграммы"
+            label: "Заголовок (диаграмма/блок)"
             type: "string"
           - name: "description"
-            label: "Описание диаграммы"
+            label: "Описание (диаграмма)"
             type: "text"
           - name: "items"
             label: "📊 Данные органов (для Диаграммы)"
@@ -363,7 +365,56 @@ content:
               - { name: "organ", label: "Орган/Ткань", type: "string" }
               - { name: "percent", label: "Процент (%)", type: "string" }
 
-          # --- Поля для блока Источника (source_credit) ---
+          # figure
+          - name: "image"
+            label: "Изображение (figure, atp diagram и т.д.)"
+            type: "image"
+          - name: "alt"
+            label: "Alt текст для изображения"
+            type: "string"
+          - name: "caption"
+            label: "Подпись (figure)"
+            type: "string"
+
+          # atp_block specific
+          - name: "image_alt"
+            label: "Alt для ATP-схемы"
+            type: "string"
+          - name: "image_note"
+            label: "Примечание к изображению (мелкий текст)"
+            type: "string"
+          - name: "key_points"
+            label: "Ключевые пункты (список) для ATP"
+            type: "string"
+            list: true
+
+          # compare_glycogen_fat
+          - name: "left"
+            label: "Левая колонка (гликоген)"
+            type: "object"
+            fields:
+              - { name: "title", label: "Заголовок колонки", type: "string" }
+              - { name: "items", label: "Пункты (list)", type: "string", list: true }
+          - name: "right"
+            label: "Правая колонка (жир)"
+            type: "object"
+            fields:
+              - { name: "title", label: "Заголовок колонки", type: "string" }
+              - { name: "items", label: "Пункты (list)", type: "string", list: true }
+          - name: "note"
+            label: "Дополнительная заметка"
+            type: "string"
+
+          # energy_flow
+          - name: "steps"
+            label: "Шаги (пошаговый поток энергии)"
+            type: "object"
+            list: true
+            fields:
+              - { name: "title", label: "Короткое название шага", type: "string" }
+              - { name: "text", label: "Описание шага", type: "text" }
+
+          # source_credit
           - name: "intro"
             label: "Вводный текст к ссылке"
             type: "string"

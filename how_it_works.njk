@@ -10,7 +10,6 @@ permalink: "how_it_works.html"
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>{{ how_it_works.title }}</title>
   <link rel="stylesheet" href="/css/base.css" />
-  {# Подключаем специфичные стили для этой страницы #}
   <link rel="stylesheet" href="/css/how_it_works.css" />
 </head>
 <body class="page-how-it-works">
@@ -30,7 +29,7 @@ permalink: "how_it_works.html"
         </button>
     </div>
 
-        <nav class="side-nav" aria-hidden="true">
+    <nav class="side-nav" aria-hidden="true">
       <button class="side-close" aria-label="Закрыть меню">✕</button>
       <ul>
         <li><a href="index.html">Видение лидера</a></li>
@@ -43,8 +42,8 @@ permalink: "how_it_works.html"
   </header>
 
   <main class="container">
-    
-    {# --- HERO SECTION --- #}
+
+    {# --- HERO --- #}
     <section class="science-hero">
         <div class="hero-overlay"></div>
         <img src="{{ how_it_works.hero.image }}" alt="{{ how_it_works.hero.alt }}" class="hero-bg" />
@@ -55,12 +54,11 @@ permalink: "how_it_works.html"
     </section>
 
     <article class="content scientific-content">
-        
+
         {# --- DYNAMIC BLOCKS --- #}
         {% if how_it_works.page_blocks %}
         {% for block in how_it_works.page_blocks %}
 
-            {# Стандартные блоки #}
             {% if block.type == 'h2' %}
                 <h2>{{ block.text }}</h2>
 
@@ -74,14 +72,12 @@ permalink: "how_it_works.html"
                     {% endfor %}
                 </ul>
 
-            {# НОВЫЙ БЛОК: Визуализация энергозатрат (Прогресс-бары) #}
             {% elif block.type == 'energy_breakdown' %}
                 <div class="energy-chart-block">
                     <h3>{{ block.title }}</h3>
                     {% if block.description %}
                         <p class="chart-desc">{{ block.description }}</p>
                     {% endif %}
-                    
                     <div class="chart-bars">
                         {% for item in block.items %}
                         <div class="bar-item">
@@ -90,7 +86,6 @@ permalink: "how_it_works.html"
                                 <span class="organ-percent">{{ item.percent }}%</span>
                             </div>
                             <div class="bar-track">
-                                {# Используем inline-стиль для задания ширины на основе данных #}
                                 <div class="bar-fill" style="width: {{ item.percent }}%;"></div>
                             </div>
                         </div>
@@ -98,7 +93,73 @@ permalink: "how_it_works.html"
                     </div>
                 </div>
 
-            {# НОВЫЙ БЛОК: Кредит источнику (Habr) #}
+            {# --- ФИГУРА (изображение + подпись) --- #}
+            {% elif block.type == 'figure' %}
+                <figure class="figure-block">
+                    <img src="{{ block.image }}" alt="{{ block.alt }}" />
+                    {% if block.caption %}
+                        <figcaption>{{ block.caption }}</figcaption>
+                    {% endif %}
+                </figure>
+
+            {# --- БЛОК: ATP (кратко, с диаграммой) --- #}
+            {% elif block.type == 'atp_block' %}
+                <section class="atp-block">
+                    <div class="atp-left">
+                        <h3>{{ block.title }}</h3>
+                        <p>{{ block.text }}</p>
+                        {% if block.key_points %}
+                        <ul class="atp-points">
+                            {% for p in block.key_points %}
+                                <li>{{ p }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </div>
+                    <div class="atp-right">
+                        <img src="{{ block.image }}" alt="{{ block.image_alt }}" />
+                        {% if block.image_note %}<p class="muted small">{{ block.image_note }}</p>{% endif %}
+                    </div>
+                </section>
+
+            {# --- СРАВНЕНИЕ: гликоген vs жир --- #}
+            {% elif block.type == 'compare_glycogen_fat' %}
+                <section class="compare-block">
+                    <h3>{{ block.title }}</h3>
+                    <div class="compare-inner">
+                        <div class="compare-col">
+                            <h4>{{ block.left.title }}</h4>
+                            <ul>
+                                {% for it in block.left.items %}
+                                    <li>{{ it }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="compare-col">
+                            <h4>{{ block.right.title }}</h4>
+                            <ul>
+                                {% for it in block.right.items %}
+                                    <li>{{ it }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% if block.note %}<p class="compare-note">{{ block.note }}</p>{% endif %}
+                </section>
+
+            {# --- БЛОК: Energy flow (пошагово) --- #}
+            {% elif block.type == 'energy_flow' %}
+                <section class="energy-flow">
+                    <h3>{{ block.title }}</h3>
+                    <ol>
+                        {% for step in block.steps %}
+                            <li>
+                                <strong>{{ step.title }}.</strong> {{ step.text }}
+                            </li>
+                        {% endfor %}
+                    </ol>
+                </section>
+
             {% elif block.type == 'source_credit' %}
                 <div class="source-citation">
                     <p>{{ block.intro }}</p>
@@ -107,7 +168,6 @@ permalink: "how_it_works.html"
                     </a>
                 </div>
 
-            {# НОВЫЙ БЛОК: Манифест (Обязательный текст в конце) #}
             {% elif block.type == 'manifesto_block' %}
                 <div class="manifesto-box">
                     <p>{{ block.text }}</p>

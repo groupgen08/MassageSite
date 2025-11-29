@@ -11,12 +11,19 @@ body.page-how-it-works {
     /* Цвет для выделения энергии/тепла (оранжевый/желтый) */
     --sci-energy: #fd7e14;
     
+    --how-it-works-hover: rgba(71, 114, 173, 0.08);
+    
     background-color: var(--sci-bg);
     color: var(--sci-text);
 }
 
 /* Активная ссылка в меню */
 body.page-how-it-works .nav-list a.active {
+    color: var(--sci-primary);
+}
+
+body.page-how-it-works .nav-list a:hover {
+    background: var(--how-it-works-hover);
     color: var(--sci-primary);
 }
 
@@ -224,3 +231,114 @@ body.page-how-it-works .nav-list a.active {
         font-size: 1rem;
     }
 }
+
+/* --- Добавочные стили для how_it_works.njk --- */
+
+/* Figure */
+.figure-block {
+  margin: 30px 0;
+  text-align: center;
+}
+.figure-block img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+}
+.figure-block figcaption {
+  margin-top: 10px;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* ATP block: двухколоночный блок (левая — текст, правая — диаграмма) */
+.atp-block {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  align-items: center;
+  background: linear-gradient(180deg,#fff,#fbfbff);
+  padding: 22px;
+  border-radius: 12px;
+  margin: 26px 0;
+  border: 1px solid rgba(0,86,179,0.06);
+}
+.atp-block img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+.atp-block h3 { margin-top: 0; color: #0056b3; }
+.atp-points { margin-top: 12px; }
+.atp-points li { margin-bottom: 8px; color: #333; }
+
+/* Compare block (glycogen vs fat) */
+.compare-block {
+  margin: 30px 0;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #eef2f7;
+}
+.compare-inner {
+  display: flex;
+  gap: 20px;
+  margin-top: 12px;
+}
+.compare-col {
+  flex: 1;
+}
+.compare-col h4 { margin-top: 0; color: #0056b3; }
+.compare-col ul { margin: 10px 0 0 18px; color: #333; }
+.compare-note { margin-top: 12px; color: #555; font-style: italic; }
+
+/* Energy flow (ordered steps) */
+.energy-flow {
+  margin: 26px 0;
+  padding: 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg,#fff,#fcfdff);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.energy-flow ol {
+  counter-reset: step;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+.energy-flow li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.energy-flow li::before {
+  counter-increment: step;
+  content: counter(step);
+  min-width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(180deg,#00a8e8,#fd7e14);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+.energy-flow strong { display: inline-block; margin-right: 6px; color: #0056b3; }
+
+/* Minor responsive */
+@media (max-width: 880px) {
+  .atp-block { grid-template-columns: 1fr; text-align: left; }
+  .atp-right { margin-top: 12px; }
+  .compare-inner { flex-direction: column; }
+}
+
+/* keep energy chart animation (already in how_it_works.css earlier) */
+.bar-fill { transition: width 1s ease-in-out; }
+
+/* small helper */
+.muted.small { color: #777; font-size: 0.9rem; margin-top: 8px; }

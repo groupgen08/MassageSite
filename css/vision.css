@@ -118,7 +118,7 @@ body.page-vision .nav-toggle {
 }
 
 /* Показать гамбургер в мобильных */
-@media (max-width:720px) {
+@media (max-width:970px) {
   /* скрыть обычное меню */
   body.page-vision .nav-list { display: none; }
   body.page-vision .nav-toggle { display: inline-block; }

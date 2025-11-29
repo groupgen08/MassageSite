@@ -184,7 +184,7 @@ body {
     margin-top: 8px
 }
 
-@media (max-width: 720px) {
+@media (max-width: 970px) {
   .hero {
     flex-direction: column; /* располагай элементы сверху вниз */
     align-items: center;    /* центрует картинку и текст по центру */

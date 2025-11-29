@@ -23,6 +23,11 @@ body.page-holistic .nav-logo {
     font-weight: 700;
 }
 
+/* Активная ссылка в меню */
+body.page-holistic .nav-list a.active {
+    color: var(--hol-accent);
+}
+
 body.page-holistic .nav-list a {
     color: var(--hol-text);
 }
