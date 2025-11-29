@@ -300,7 +300,7 @@ content:
             label: "Телефон (текст)"
             type: "string"
 
-  # --- ФАЙЛ 5: Как это работает (Метаболизм) ---
+# --- ФАЙЛ 5: Как это работает (Метаболизм) ---
   - name: "how_it_works"
     label: "Как это работает"
     type: "file"
@@ -308,7 +308,7 @@ content:
     format: "json"
     fields:
       - { name: "title", label: "Заголовок страницы (SEO)", type: "string" }
-
+      
       - name: "hero"
         label: "Шапка страницы"
         type: "object"
@@ -318,109 +318,111 @@ content:
           - { name: "h1", label: "Заголовок H1", type: "string" }
           - { name: "lead", label: "Подзаголовок", type: "text" }
 
+      # --- ИСПРАВЛЕННЫЙ КОНСТРУКТОР (Полиморфный список) ---
       - name: "page_blocks"
-        label: "Контент страницы"
+        label: "Конструктор контента"
         type: "object"
         list: true
-        fields:
-          - name: "type"
-            label: "🟢 ТИП БЛОКА"
-            type: "select"
-            default: "paragraph"
-            options:
-              values:
-                - { label: "Заголовок H2", value: "h2" }
-                - { label: "Абзац текста", value: "paragraph" }
-                - { label: "Маркированный список", value: "list" }
-                - { label: "📊 Диаграмма энергозатрат", value: "energy_breakdown" }
-                - { label: "🖼️ Фигура (изображение + подпись)", value: "figure" }
-                - { label: "🔬 ATP: молекулярная схема", value: "atp_block" }
-                - { label: "⚖️ Сравнение: гликоген vs жир", value: "compare_glycogen_fat" }
-                - { label: "➡️ Энергетический поток (пошагово)", value: "energy_flow" }
-                - { label: "🔗 Ссылка на источник (Habr)", value: "source_credit" }
-                - { label: "❗ Манифест (Важный текст в конце)", value: "manifesto_block" }
-
-          - name: "text"
-            label: "📝 Текст (для H2, Параграфов и Манифеста)"
-            type: "text"
-
-          - name: "items"
-            label: "📋 Элементы списка (для простого списка)"
-            type: "string"
-            list: true
-
-          # energy_breakdown
-          - name: "title"
-            label: "Заголовок (диаграмма/блок)"
-            type: "string"
-          - name: "description"
-            label: "Описание (диаграмма)"
-            type: "text"
-          - name: "items"
-            label: "📊 Данные органов (для Диаграммы)"
-            type: "object"
-            list:
-              summary: "{fields.organ}: {fields.percent}%"
+        # ВМЕСТО fields ИСПОЛЬЗУЕМ types
+        # Это создает меню выбора типа блока и показывает только нужные поля
+        types:
+          # 1. Заголовок H2
+          - name: "h2"
+            label: "Заголовок H2"
             fields:
-              - { name: "organ", label: "Орган/Ткань", type: "string" }
-              - { name: "percent", label: "Процент (%)", type: "string" }
+              - { name: "text", label: "Текст заголовка", type: "string" }
 
-          # figure
-          - name: "image"
-            label: "Изображение (figure, atp diagram и т.д.)"
-            type: "image"
-          - name: "alt"
-            label: "Alt текст для изображения"
-            type: "string"
-          - name: "caption"
-            label: "Подпись (figure)"
-            type: "string"
-
-          # atp_block specific
-          - name: "image_alt"
-            label: "Alt для ATP-схемы"
-            type: "string"
-          - name: "image_note"
-            label: "Примечание к изображению (мелкий текст)"
-            type: "string"
-          - name: "key_points"
-            label: "Ключевые пункты (список) для ATP"
-            type: "string"
-            list: true
-
-          # compare_glycogen_fat
-          - name: "left"
-            label: "Левая колонка (гликоген)"
-            type: "object"
+          # 2. Абзац
+          - name: "paragraph"
+            label: "Абзац текста"
             fields:
-              - { name: "title", label: "Заголовок колонки", type: "string" }
-              - { name: "items", label: "Пункты (list)", type: "string", list: true }
-          - name: "right"
-            label: "Правая колонка (жир)"
-            type: "object"
-            fields:
-              - { name: "title", label: "Заголовок колонки", type: "string" }
-              - { name: "items", label: "Пункты (list)", type: "string", list: true }
-          - name: "note"
-            label: "Дополнительная заметка"
-            type: "string"
+              - { name: "text", label: "Текст", type: "text" }
 
-          # energy_flow
-          - name: "steps"
-            label: "Шаги (пошаговый поток энергии)"
-            type: "object"
-            list: true
+          # 3. Маркированный список (Простой)
+          - name: "list"
+            label: "Маркированный список"
             fields:
-              - { name: "title", label: "Короткое название шага", type: "string" }
-              - { name: "text", label: "Описание шага", type: "text" }
+              - name: "items"
+                label: "Элементы списка"
+                type: "string"
+                list: true
 
-          # source_credit
-          - name: "intro"
-            label: "Вводный текст к ссылке"
-            type: "string"
-          - name: "link_label"
-            label: "Текст ссылки"
-            type: "string"
-          - name: "link_url"
-            label: "URL ссылки"
-            type: "string"
+          # 4. Диаграмма энергозатрат
+          - name: "energy_breakdown"
+            label: "📊 Диаграмма энергозатрат"
+            fields:
+              - { name: "title", label: "Заголовок", type: "string" }
+              - { name: "description", label: "Описание", type: "text" }
+              - name: "items"
+                label: "Данные органов"
+                type: "object"
+                list:
+                  summary: "{fields.organ}: {fields.percent}%"
+                fields:
+                  - { name: "organ", label: "Орган", type: "string" }
+                  - { name: "percent", label: "Процент", type: "string" }
+
+          # 5. Фигура (Картинка с подписью)
+          - name: "figure"
+            label: "🖼️ Картинка с подписью"
+            fields:
+              - { name: "image", label: "Изображение", type: "image" }
+              - { name: "alt", label: "Alt текст", type: "string" }
+              - { name: "caption", label: "Подпись", type: "string" }
+
+          # 6. Блок ATP
+          - name: "atp_block"
+            label: "🔬 ATP: Молекулярная схема"
+            fields:
+              - { name: "title", label: "Заголовок", type: "string" }
+              - { name: "text", label: "Текст", type: "text" }
+              - { name: "key_points", label: "Ключевые пункты", type: "string", list: true }
+              - { name: "image", label: "Схема (картинка)", type: "image" }
+              - { name: "image_alt", label: "Alt схемы", type: "string" }
+              - { name: "image_note", label: "Примечание к схеме", type: "string" }
+
+          # 7. Сравнение (Гликоген vs Жир)
+          - name: "compare_glycogen_fat"
+            label: "⚖️ Сравнение: Гликоген vs Жир"
+            fields:
+              - { name: "title", label: "Заголовок блока", type: "string" }
+              - name: "left"
+                label: "Левая колонка"
+                type: "object"
+                fields:
+                  - { name: "title", label: "Заголовок", type: "string" }
+                  - { name: "items", label: "Пункты", type: "string", list: true }
+              - name: "right"
+                label: "Правая колонка"
+                type: "object"
+                fields:
+                  - { name: "title", label: "Заголовок", type: "string" }
+                  - { name: "items", label: "Пункты", type: "string", list: true }
+              - { name: "note", label: "Вывод/Заметка", type: "string" }
+
+          # 8. Поток энергии
+          - name: "energy_flow"
+            label: "➡️ Энергетический поток"
+            fields:
+              - { name: "title", label: "Заголовок", type: "string" }
+              - name: "steps"
+                label: "Шаги процесса"
+                type: "object"
+                list: true
+                fields:
+                  - { name: "title", label: "Название шага", type: "string" }
+                  - { name: "text", label: "Описание", type: "string" }
+
+          # 9. Ссылка на источник
+          - name: "source_credit"
+            label: "🔗 Ссылка на источник"
+            fields:
+              - { name: "intro", label: "Вводный текст", type: "string" }
+              - { name: "link_label", label: "Текст ссылки", type: "string" }
+              - { name: "link_url", label: "URL", type: "string" }
+
+          # 10. Манифест
+          - name: "manifesto_block"
+            label: "❗ Манифест (Важный текст)"
+            fields:
+              - { name: "text", label: "Текст манифеста", type: "text" }
