@@ -300,7 +300,16 @@ content:
             label: "Телефон (текст)"
             type: "string"
 
-# --- ФАЙЛ 5: Как это работает (Метаболизм) ---
+# pages.yml (ФИНАЛЬНАЯ ВЕРСИЯ ДЛЯ how_it_works)
+
+# --- ГЛОБАЛЬНЫЕ НАСТРОЙКИ ---
+# Предполагаем, что секция media настроена правильно и указывает на папку с картинками.
+# Пример (если картинки в корне 'images'):
+# media:
+#   input: "images"
+#   output: "/images"
+
+# --- КОНФИГУРАЦИЯ СТРАНИЦЫ "Как это работает" ---
   - name: "how_it_works"
     label: "Как это работает"
     type: "file"
@@ -308,7 +317,7 @@ content:
     format: "json"
     fields:
       - { name: "title", label: "Заголовок страницы (SEO)", type: "string" }
-      
+        
       - name: "hero"
         label: "Шапка страницы"
         type: "object"
@@ -316,16 +325,15 @@ content:
           - { name: "image", label: "Фон шапки", type: "image" }
           - { name: "alt", label: "Alt текст", type: "string" }
           - { name: "h1", label: "Заголовок H1", type: "string" }
-          - { name: "lead", label: "Подзаголовок", type: "text" }
-
-      # --- ИСПРАВЛЕННЫЙ КОНСТРУКТОР (Полиморфный список) ---
+          - { name: "lead", label: "Подзаголовок", type: "textarea" } # Используем textarea для надежности
+          
+      # --- ДИНАМИЧЕСКИЙ КОНСТРУКТОР БЛОКОВ ---
       - name: "page_blocks"
         label: "Конструктор контента"
         type: "object"
         list: true
-        # ВМЕСТО fields ИСПОЛЬЗУЕМ types
-        # Это создает меню выбора типа блока и показывает только нужные поля
         types:
+          
           # 1. Заголовок H2
           - name: "h2"
             label: "Заголовок H2"
@@ -336,7 +344,7 @@ content:
           - name: "paragraph"
             label: "Абзац текста"
             fields:
-              - { name: "text", label: "Текст", type: "text" }
+              - { name: "text", label: "Текст", type: "text", widget: "markdown" } # Используем markdown для форматирования
 
           # 3. Маркированный список (Простой)
           - name: "list"
@@ -345,22 +353,22 @@ content:
               - name: "items"
                 label: "Элементы списка"
                 type: "string"
-                list: true
+                list: true # Список простых строк
 
           # 4. Диаграмма энергозатрат
           - name: "energy_breakdown"
             label: "📊 Диаграмма энергозатрат"
             fields:
               - { name: "title", label: "Заголовок", type: "string" }
-              - { name: "description", label: "Описание", type: "text" }
+              - { name: "description", label: "Описание", type: "textarea" }
               - name: "items"
                 label: "Данные органов"
                 type: "object"
                 list:
-                  summary: "{fields.organ}: {fields.percent}%"
+                  summary: "{organ}: {percent}%" # В summary для Pages CMS не нужны fields.
                 fields:
                   - { name: "organ", label: "Орган", type: "string" }
-                  - { name: "percent", label: "Процент", type: "string" }
+                  - { name: "percent", label: "Процент", type: "string" } # Процент как строка, чтобы не было проблем с валидацией
 
           # 5. Фигура (Картинка с подписью)
           - name: "figure"
@@ -375,7 +383,7 @@ content:
             label: "🔬 ATP: Молекулярная схема"
             fields:
               - { name: "title", label: "Заголовок", type: "string" }
-              - { name: "text", label: "Текст", type: "text" }
+              - { name: "text", label: "Текст", type: "textarea" }
               - { name: "key_points", label: "Ключевые пункты", type: "string", list: true }
               - { name: "image", label: "Схема (картинка)", type: "image" }
               - { name: "image_alt", label: "Alt схемы", type: "string" }
@@ -411,13 +419,13 @@ content:
                 list: true
                 fields:
                   - { name: "title", label: "Название шага", type: "string" }
-                  - { name: "text", label: "Описание", type: "string" }
+                  - { name: "text", label: "Описание", type: "textarea" } # Используем textarea для длинных описаний
 
           # 9. Ссылка на источник
           - name: "source_credit"
             label: "🔗 Ссылка на источник"
             fields:
-              - { name: "intro", label: "Вводный текст", type: "string" }
+              - { name: "intro", label: "Вводный текст", type: "textarea" }
               - { name: "link_label", label: "Текст ссылки", type: "string" }
               - { name: "link_url", label: "URL", type: "string" }
 
@@ -425,4 +433,4 @@ content:
           - name: "manifesto_block"
             label: "❗ Манифест (Важный текст)"
             fields:
-              - { name: "text", label: "Текст манифеста", type: "text" }
+              - { name: "text", label: "Текст манифеста", type: "text", widget: "markdown" } # Используем markdown для форматирования
