@@ -1,0 +1,226 @@
+/* --- Цветовая палитра "Наука/Биохимия" --- */
+body.page-how-it-works {
+    /* Базовый фон - чистый белый или очень легкий серый */
+    --sci-bg: #f8f9fa; 
+    /* Основной текст - темно-серый для контраста */
+    --sci-text: #333333;
+    /* Акцентный цвет - глубокий "научный" синий */
+    --sci-primary: #0056b3;
+    /* Вторичный акцент - голубой */
+    --sci-secondary: #00a8e8;
+    /* Цвет для выделения энергии/тепла (оранжевый/желтый) */
+    --sci-energy: #fd7e14;
+    
+    background-color: var(--sci-bg);
+    color: var(--sci-text);
+}
+
+/* Активная ссылка в меню */
+body.page-how-it-works .nav-list a.active {
+    color: var(--sci-primary);
+}
+
+/* --- HERO SECTION (аналогично фитотерапии, но свои цвета) --- */
+.science-hero {
+    position: relative;
+    height: 320px;
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 50px;
+    background: #000; /* fallback */
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    opacity: 0.7; /* Чуть приглушаем фото */
+}
+
+.hero-overlay {
+    /* Градиент для лучшей читаемости текста на научном фоне */
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,86,179,0.4), rgba(0,0,0,0.7));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    color: #fff !important;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.hero-content .lead {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.9);
+}
+
+/* --- ОБЩИЙ КОНТЕНТ --- */
+.scientific-content {
+    max-width: 800px; /* Чуть уже для удобства чтения лонгрида */
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.scientific-content h2 {
+    color: var(--sci-primary);
+    border-bottom: 2px solid rgba(0,86,179,0.1);
+    padding-bottom: 10px;
+    margin-top: 40px;
+}
+
+/* --- НОВЫЙ БЛОК: Диаграмма энергозатрат (energy_breakdown) --- */
+.energy-chart-block {
+    margin: 40px 0;
+    background: #f1f5f9; /* Очень легкий фон для блока */
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.energy-chart-block h3 {
+    margin-top: 0;
+    color: var(--sci-primary);
+}
+
+.chart-desc {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.chart-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bar-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--sci-text);
+}
+
+.organ-percent {
+    color: var(--sci-energy); /* Выделяем проценты цветом энергии */
+}
+
+.bar-track {
+    height: 12px;
+    background: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    /* Градиент от синего к "энергетическому" оранжевому */
+    background: linear-gradient(to right, var(--sci-secondary), var(--sci-energy));
+    border-radius: 6px;
+    /* Анимация при загрузке */
+    transition: width 1s ease-in-out;
+}
+
+/* --- НОВЫЙ БЛОК: Ссылка на источник (source_credit) --- */
+.source-citation {
+    margin: 40px 0;
+    padding: 20px;
+    background: #fff;
+    border-left: 4px solid var(--sci-secondary);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.source-citation p {
+    margin: 0 0 10px 0;
+    font-style: italic;
+    color: #555;
+}
+
+.source-link {
+    display: inline-block;
+    color: var(--sci-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--sci-primary);
+    transition: all 0.2s;
+}
+
+.source-link:hover {
+    color: var(--sci-energy);
+    border-bottom-style: solid;
+}
+
+/* --- НОВЫЙ БЛОК: Манифест (manifesto_block) --- */
+.manifesto-box {
+    margin-top: 60px;
+    padding: 30px;
+    /* Темный фон для контраста и важности */
+    background: var(--sci-text); 
+    color: #fff; /* Белый текст */
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Декоративная линия сверху */
+.manifesto-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 4px;
+    background: linear-gradient(to right, var(--sci-primary), var(--sci-energy));
+}
+
+.manifesto-box p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .scientific-content {
+        padding: 25px;
+    }
+    .manifesto-box {
+        padding: 25px;
+    }
+    .manifesto-box p {
+        font-size: 1rem;
+    }
+}

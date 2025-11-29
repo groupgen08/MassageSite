@@ -299,3 +299,77 @@ content:
           - name: "phone"
             label: "Телефон (текст)"
             type: "string"
+
+  # --- ФАЙЛ 5: Как это работает (Метаболизм) ---
+  - name: "how_it_works"
+    label: "Как это работает"
+    type: "file"
+    path: "_data/how_it_works.json"
+    format: "json"
+    fields:
+      - { name: "title", label: "Заголовок страницы (SEO)", type: "string" }
+      
+      - name: "hero"
+        label: "Шапка страницы"
+        type: "object"
+        fields:
+          - { name: "image", label: "Фон шапки", type: "image" }
+          - { name: "alt", label: "Alt текст", type: "string" }
+          - { name: "h1", label: "Заголовок H1", type: "string" }
+          - { name: "lead", label: "Подзаголовок", type: "text" }
+
+      # --- КОНСТРУКТОР БЛОКОВ ---
+      - name: "page_blocks"
+        label: "Контент страницы"
+        type: "object"
+        list: true
+        fields:
+          - name: "type"
+            label: "🟢 ТИП БЛОКА"
+            type: "select"
+            default: "paragraph"
+            options:
+              values:
+                - { label: "Заголовок H2", value: "h2" }
+                - { label: "Абзац текста", value: "paragraph" }
+                - { label: "Маркированный список", value: "list" }
+                - { label: "📊 Диаграмма энергозатрат", value: "energy_breakdown" }
+                - { label: "🔗 Ссылка на источник (Habr)", value: "source_credit" }
+                - { label: "❗ Манифест (Важный текст в конце)", value: "manifesto_block" }
+
+          # --- Поля для простых блоков ---
+          - name: "text"
+            label: "📝 Текст (для H2, Параграфов и Манифеста)"
+            type: "text"
+            
+          - name: "items"
+            label: "📋 Элементы списка (для простого списка)"
+            type: "string"
+            list: true
+
+          # --- Поля для блока Диаграммы (energy_breakdown) ---
+          - name: "title"
+            label: "Заголовок диаграммы"
+            type: "string"
+          - name: "description"
+            label: "Описание диаграммы"
+            type: "text"
+          - name: "items"
+            label: "📊 Данные органов (для Диаграммы)"
+            type: "object"
+            list:
+              summary: "{fields.organ}: {fields.percent}%"
+            fields:
+              - { name: "organ", label: "Орган/Ткань", type: "string" }
+              - { name: "percent", label: "Процент (%)", type: "string" }
+
+          # --- Поля для блока Источника (source_credit) ---
+          - name: "intro"
+            label: "Вводный текст к ссылке"
+            type: "string"
+          - name: "link_label"
+            label: "Текст ссылки"
+            type: "string"
+          - name: "link_url"
+            label: "URL ссылки"
+            type: "string"

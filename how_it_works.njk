@@ -1,0 +1,130 @@
+---
+permalink: "how_it_works.html"
+---
+{% set page_id = 'how_it_works' %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{{ how_it_works.title }}</title>
+  <link rel="stylesheet" href="/css/base.css" />
+  {# Подключаем специфичные стили для этой страницы #}
+  <link rel="stylesheet" href="/css/how_it_works.css" />
+</head>
+<body class="page-how-it-works">
+
+  <header class="site-header">
+    <div class="nav">
+        <a class="nav-logo" href="index.html">The Fulcrum</a>
+        <ul class="nav-list">
+          <li><a href="index.html">Видение лидера</a></li>
+          <li><a href="holistic.html">Холистический подход</a></li>
+          <li><a href="apitherapy.html">Апитерапия</a></li>
+          <li><a href="phytotherapy.html">Фитотерапия</a></li>
+          <li><a href="how_it_works.html" class="active">Как это работает</a></li>
+        </ul>
+        <button class="nav-toggle" aria-label="Открыть меню" aria-expanded="false">
+        ☰
+        </button>
+    </div>
+
+        <nav class="side-nav" aria-hidden="true">
+      <button class="side-close" aria-label="Закрыть меню">✕</button>
+      <ul>
+        <li><a href="index.html">Видение лидера</a></li>
+        <li><a href="holistic.html">Холистический подход</a></li>
+        <li><a href="apitherapy.html">Апитерапия</a></li>
+        <li><a href="phytotherapy.html">Фитотерапия</a></li>
+        <li><a href="how_it_works.html">Как это работает</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    {# --- HERO SECTION --- #}
+    <section class="science-hero">
+        <div class="hero-overlay"></div>
+        <img src="{{ how_it_works.hero.image }}" alt="{{ how_it_works.hero.alt }}" class="hero-bg" />
+        <div class="hero-content">
+            <h1>{{ how_it_works.hero.h1 }}</h1>
+            <p class="lead">{{ how_it_works.hero.lead }}</p>
+        </div>
+    </section>
+
+    <article class="content scientific-content">
+        
+        {# --- DYNAMIC BLOCKS --- #}
+        {% if how_it_works.page_blocks %}
+        {% for block in how_it_works.page_blocks %}
+
+            {# Стандартные блоки #}
+            {% if block.type == 'h2' %}
+                <h2>{{ block.text }}</h2>
+
+            {% elif block.type == 'paragraph' %}
+                <p>{{ block.text | safe }}</p>
+
+            {% elif block.type == 'list' %}
+                <ul>
+                    {% for item in block.items %}
+                        <li>{{ item | safe }}</li>
+                    {% endfor %}
+                </ul>
+
+            {# НОВЫЙ БЛОК: Визуализация энергозатрат (Прогресс-бары) #}
+            {% elif block.type == 'energy_breakdown' %}
+                <div class="energy-chart-block">
+                    <h3>{{ block.title }}</h3>
+                    {% if block.description %}
+                        <p class="chart-desc">{{ block.description }}</p>
+                    {% endif %}
+                    
+                    <div class="chart-bars">
+                        {% for item in block.items %}
+                        <div class="bar-item">
+                            <div class="bar-label">
+                                <span class="organ-name">{{ item.organ }}</span>
+                                <span class="organ-percent">{{ item.percent }}%</span>
+                            </div>
+                            <div class="bar-track">
+                                {# Используем inline-стиль для задания ширины на основе данных #}
+                                <div class="bar-fill" style="width: {{ item.percent }}%;"></div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            {# НОВЫЙ БЛОК: Кредит источнику (Habr) #}
+            {% elif block.type == 'source_credit' %}
+                <div class="source-citation">
+                    <p>{{ block.intro }}</p>
+                    <a href="{{ block.link_url }}" target="_blank" rel="noopener noreferrer" class="source-link">
+                        {{ block.link_label }} ↗
+                    </a>
+                </div>
+
+            {# НОВЫЙ БЛОК: Манифест (Обязательный текст в конце) #}
+            {% elif block.type == 'manifesto_block' %}
+                <div class="manifesto-box">
+                    <p>{{ block.text }}</p>
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+        {% endif %}
+
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>© The Fulcrum — Портал здоровья</p>
+  </footer>
+
+  <script src="/script/menu.js"></script>
+</body>
+</html>
