@@ -64,11 +64,13 @@ permalink: "how_it_works.html"
                 <p>{{ block.text | safe }}</p>
 
             {% elif block.type == 'list' %}
+                {% if block.data.items %}
                 <ul>
-                    {% for item in block.items %}
+                    {% for item in block.data.items %}
                         <li>{{ item | safe }}</li>
                     {% endfor %}
                 </ul>
+                {% endif %}
 
             {% elif block.type == 'energy_breakdown' %}
                 <div class="energy-chart-block">
@@ -106,12 +108,12 @@ permalink: "how_it_works.html"
                     <div class="atp-left">
                         <h3>{{ block.title }}</h3>
                         <p>{{ block.text }}</p>
-                        {% if block.key_points %}
-                        <ul class="atp-points">
-                            {% for p in block.key_points %}
-                                <li>{{ p }}</li>
-                            {% endfor %}
-                        </ul>
+                        {% if block.key_points_data.points %}
+                            <ul class="atp-points">
+                                {% for p in block.key_points_data.points %}
+                                    <li>{{ p }}</li>
+                                {% endfor %}
+                            </ul>
                         {% endif %}
                     </div>
                     <div class="atp-right">

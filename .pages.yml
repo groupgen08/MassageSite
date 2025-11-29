@@ -309,7 +309,9 @@ content:
 #   input: "images"
 #   output: "/images"
 
-# --- КОНФИГУРАЦИЯ СТРАНИЦЫ "Как это работает" ---
+# --- ФАЙЛ 5: Как это работает (Метаболизм) ---
+# Обновленная версия, усиленная против ошибки "Cannot read properties of undefined (reading 'map')"
+
   - name: "how_it_works"
     label: "Как это работает"
     type: "file"
@@ -325,8 +327,8 @@ content:
           - { name: "image", label: "Фон шапки", type: "image" }
           - { name: "alt", label: "Alt текст", type: "string" }
           - { name: "h1", label: "Заголовок H1", type: "string" }
-          - { name: "lead", label: "Подзаголовок", type: "textarea" } # Используем textarea для надежности
-          
+          - { name: "lead", label: "Подзаголовок", type: "textarea" }
+
       # --- ДИНАМИЧЕСКИЙ КОНСТРУКТОР БЛОКОВ ---
       - name: "page_blocks"
         label: "Конструктор контента"
@@ -344,16 +346,17 @@ content:
           - name: "paragraph"
             label: "Абзац текста"
             fields:
-              - { name: "text", label: "Текст", type: "text", widget: "markdown" } # Используем markdown для форматирования
+              - { name: "text", label: "Текст", type: "text", widget: "markdown" }
 
-          # 3. Маркированный список (Простой)
+          # 3. Маркированный список (Простой) - УСИЛЕННАЯ СТРУКТУРА
           - name: "list"
             label: "Маркированный список"
             fields:
-              - name: "items"
+              - name: "data" # ОБЕРТКА
                 label: "Элементы списка"
-                type: "string"
-                list: true # Список простых строк
+                type: "object"
+                fields:
+                  - { name: "items", label: "Пункты", type: "string", list: true } # МАССИВ ВНУТРИ
 
           # 4. Диаграмма энергозатрат
           - name: "energy_breakdown"
@@ -361,14 +364,14 @@ content:
             fields:
               - { name: "title", label: "Заголовок", type: "string" }
               - { name: "description", label: "Описание", type: "textarea" }
-              - name: "items"
+              - name: "items" # Массив объектов
                 label: "Данные органов"
                 type: "object"
                 list:
-                  summary: "{organ}: {percent}%" # В summary для Pages CMS не нужны fields.
+                  summary: "{organ}: {percent}%"
                 fields:
                   - { name: "organ", label: "Орган", type: "string" }
-                  - { name: "percent", label: "Процент", type: "string" } # Процент как строка, чтобы не было проблем с валидацией
+                  - { name: "percent", label: "Процент", type: "string" }
 
           # 5. Фигура (Картинка с подписью)
           - name: "figure"
@@ -378,18 +381,22 @@ content:
               - { name: "alt", label: "Alt текст", type: "string" }
               - { name: "caption", label: "Подпись", type: "string" }
 
-          # 6. Блок ATP
+          # 6. Блок ATP - УСИЛЕННАЯ СТРУКТУРА
           - name: "atp_block"
             label: "🔬 ATP: Молекулярная схема"
             fields:
               - { name: "title", label: "Заголовок", type: "string" }
               - { name: "text", label: "Текст", type: "textarea" }
-              - { name: "key_points", label: "Ключевые пункты", type: "string", list: true }
+              - name: "key_points_data" # ОБЕРТКА
+                label: "Ключевые пункты"
+                type: "object"
+                fields:
+                  - { name: "points", label: "Пункты", type: "string", list: true } # МАССИВ ВНУТРИ
               - { name: "image", label: "Схема (картинка)", type: "image" }
               - { name: "image_alt", label: "Alt схемы", type: "string" }
               - { name: "image_note", label: "Примечание к схеме", type: "string" }
 
-          # 7. Сравнение (Гликоген vs Жир)
+          # 7. Сравнение (Гликоген vs Жир) - УСИЛЕННАЯ ВЛОЖЕННОСТЬ
           - name: "compare_glycogen_fat"
             label: "⚖️ Сравнение: Гликоген vs Жир"
             fields:
@@ -399,13 +406,13 @@ content:
                 type: "object"
                 fields:
                   - { name: "title", label: "Заголовок", type: "string" }
-                  - { name: "items", label: "Пункты", type: "string", list: true }
+                  - { name: "items", label: "Пункты", type: "string", list: true } # Массив внутри объекта
               - name: "right"
                 label: "Правая колонка"
                 type: "object"
                 fields:
                   - { name: "title", label: "Заголовок", type: "string" }
-                  - { name: "items", label: "Пункты", type: "string", list: true }
+                  - { name: "items", label: "Пункты", type: "string", list: true } # Массив внутри объекта
               - { name: "note", label: "Вывод/Заметка", type: "string" }
 
           # 8. Поток энергии
@@ -413,13 +420,13 @@ content:
             label: "➡️ Энергетический поток"
             fields:
               - { name: "title", label: "Заголовок", type: "string" }
-              - name: "steps"
+              - name: "steps" # Массив объектов
                 label: "Шаги процесса"
                 type: "object"
                 list: true
                 fields:
                   - { name: "title", label: "Название шага", type: "string" }
-                  - { name: "text", label: "Описание", type: "textarea" } # Используем textarea для длинных описаний
+                  - { name: "text", label: "Описание", type: "textarea" }
 
           # 9. Ссылка на источник
           - name: "source_credit"
@@ -433,4 +440,4 @@ content:
           - name: "manifesto_block"
             label: "❗ Манифест (Важный текст)"
             fields:
-              - { name: "text", label: "Текст манифеста", type: "text", widget: "markdown" } # Используем markdown для форматирования
+              - { name: "text", label: "Текст манифеста", type: "text", widget: "markdown" }
