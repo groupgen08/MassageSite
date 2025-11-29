@@ -43,7 +43,7 @@ body.page-apitherapy {
     flex: 0 0 220px;
 }
 
-/* Активная ссылка в меню */
+/* Активная ссылка в меню. */
 body.page-apitherapy .nav-list a.active {
     color: var(--apitherapy-accent);
 }
